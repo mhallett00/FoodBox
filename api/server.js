@@ -15,6 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
@@ -22,10 +23,8 @@ app.get('/tasks', (req, res) => {
   // use the knex variable above to create dynamic queries
 });
 
-app.get('/api/greeting', (req, res) => {
-  const name = req.query.name || 'World';
-  res.setHeader('Content-Type', 'application/json');
-  res.send(JSON.stringify({ greeting: `Hello ${name}!` }));
+app.get("/api", (req, res, next) => {
+  res.send({ message: "We did it!" });
 });
 
 module.exports = app;
