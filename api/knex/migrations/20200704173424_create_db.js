@@ -60,13 +60,13 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
   return knex.schema
-    .dropTable('users')
-    .dropTable('menu_items')
-    .dropTable('allegens')
-    .dropTable('item_allergens')
-    .dropTable('carts')
-    .dropTable('cart_items')
-    .dropTable('orders')
     .dropTable('seller_orders')
+    .dropTable('orders')
+    .dropTable('cart_items')
+    .dropTable('carts')
+    .dropTable('item_allergens')
+    .dropTable('allergens')
+    .dropTable('menu_items')
+    .dropTable('users')
 
 };
