@@ -1,12 +1,13 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const usersRouter = require('./routes/users');
+const menu_itemsRouter = require('./routes/menu_items');
+const allergensRouter = require('./routes/allergens');
 
-var app = express();
+const app = express();
 const knex = require('./knex/knex.js');
 
 app.use(logger('dev'));
@@ -16,12 +17,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
-app.get('/tasks', (req, res) => {
-  // use the knex variable above to create dynamic queries
-});
+app.use('/api/users', usersRouter);
+app.use('/api/menu_items', menu_itemsRouter);
+app.use('/api/allergens', allergensRouter);
 
 app.get("/api", (req, res, next) => {
   res.send({ message: "We did it!" });
