@@ -37,11 +37,15 @@ const users = [
   }
 ]
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
+// /* GET users listing. */
+// router.get('/', function(req, res, next) {
   
-  res.json(users);
-  console.log("User data sent");
+//   res.json({ users: users })
+//   console.log("User data sent");
+// });
+
+router.post('/', (req, res) => {
+
 });
 
 module.exports = router;
