@@ -1,6 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import logo from './logo.svg';
-import './App.css';
+// import './App.css';
 import axios from "axios";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import {
@@ -10,13 +9,11 @@ import {
   Link
 } from "react-router-dom";
 import Homepage from './Homepage';
+import Navigation from './Navigation';
 import About from './About';
 import Menu from './Menu';
 import Register from './register';
 import Login from './Login';
-
-
-
 
 export default function App() {
   //  const [show, setShow] = useState(REGISTER);
@@ -38,25 +35,9 @@ export default function App() {
   return (
     <Router>
       <div>
-        <nav>
-          <header className="App-header">
-            <div className="header-title">
-              <div className="logo">
-                <Link to="/">F O O D B O X</Link>
-              </div>
-                <Link className="react-links" to="/Homepage">Home</Link>
-                <Link className="react-links" to="/about">About</Link>
-                <Link className="react-links" to="/menu">Menu</Link>
-                <Link className="react-links" to="/login">Login</Link>
-              </div>
-
-              <div className="App">
-                <Login />
-              </div>
-              
-          </header>
-        </nav>
-
+        <Navigation/>
+          <div className="App">
+          </div>
         {/* A <Switch> looks through its children <Route>s and
         renders the first one that matches the current URL. */}
 
@@ -67,7 +48,6 @@ export default function App() {
             // dispatch={dispatch}
             // profileInfo={state.profileInfo}
           />
-            
           </Route>
           <Route path="/menu">
             <Menu />
