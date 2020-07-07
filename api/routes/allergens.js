@@ -23,7 +23,7 @@ const allergens = [
 /* GET allergens listing. */
 router.get('/', function(req, res, next) {
   
-  res.json(allergens);
+  res.json({allergens: allergens});
   console.log("Allergens data sent");
 });
 
