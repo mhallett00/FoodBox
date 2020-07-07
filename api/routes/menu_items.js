@@ -1,4 +1,5 @@
 var express = require('express');
+const knex = require('../knex/knex');
 var router = express.Router();
 
 // static data
@@ -53,11 +54,62 @@ const menu_items = [
   }
 ]
 
-/* GET menu_items listing. */
-router.get('/', function(req, res, next) {
+// /* GET menu_items listing. */
+// router.get('/', (req, res) => {
   
-  res.json(menu_items);
-  console.log("Menu items data sent");
+//   res.json({ menu_items: menu_items });
+//   console.log("Menu items data sent");
+// });
+
+// /* GET menu_items listing psql */
+// router.get('/', (req, res) => {
+//   knex('menu_items')
+//     .join('item_allergens', 'menu_items.id', 'item_allergens.menu_item_id')
+//     .join('allergens', 'allergens.id', 'item_allergens.allergen_id' )
+
+//     .then((todo) => {
+//       res.json(todo)
+//     });
+// });
+
+/* GET menu_items listing psql */
+router.get('/', (req, res) => {
+  knex('menu_items')
+    .leftJoin('item_allergens','menu_items.id','item_allergens.menu_item_id')
+    .leftJoin('allergens', 'allergens.id', 'item_allergens.allergen_id' )
+    .select([
+      'menu_items.*',
+      knex.raw('JSON_AGG(allergens.*) as allergens')
+    ])
+    .groupBy('menu_items.id')
+    .then((todo) => {
+      res.json(todo)
+    });
+});
+
+/* GET a menu_items by ID */
+router.get('/:id', (req, res) => {
+  res.json(menu_items[req.params.id]);
+  console.log(`Menu item ${menu_items[req.params.id].name} sent`);
+});
+
+/* POST add a new menu item */
+router.post('/', (req, res) => {
+
+});
+
+/* PUT edit a menu item */
+router.put('/:id', (req, res) => {
+  const { id } = req.params;
+
+  res.json({ deleted: id });
+});
+
+/* DELETE delete a menu item */
+router.delete('/:id', (req, res) => {
+  const { id } = req.params;
+
+  res.json({ deleted: id });
 });
 
 module.exports = router;
