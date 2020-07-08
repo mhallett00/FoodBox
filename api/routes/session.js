@@ -1,17 +1,27 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const knex = require('../knex/knex');
 
-
-// /* GET session route ping */
-// router.get('/', function(req, res) {
-//   res.send({message: "Session route get"})
-//   console.log("Session route");
-// });
-
-/* POST session form listing. */
+/* POST user session creation. */
 router.post('/', function(req, res) {
-  console.log("Session route");
-  
+  if (req.body.email) {
+    knex('users')
+      .where('email', req.body.email)
+      .first()
+      .then((user) =>{
+        if(user.password_digest === req.body.password_digest) {
+          res.json(user);
+        }
+        else {
+          res.status(403).send("Error 403\npassword incorrect! Please try again!");
+        }
+      })
+      .catch((err) =>{
+        console.log(err);
+      })
+  } else {
+    res.status(403).send("Error 403\nPlease enter an email! Please try again!");
+  }
 });
 
 module.exports = router;
