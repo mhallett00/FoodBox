@@ -38,12 +38,6 @@ export default function BuyerCart() {
             </tr>
           </tbody>
         </Table>
-          {/* <div>
-            <h3>subtotal</h3>
-          </div>
-          <div className="buyer-cart subtotal amount">
-            Buyer Cart Amount
-          </div> */}
           <div className="buyer-cart checkout">
             <Button href="/order_payment" variant="dark" type="submit">
               Checkout

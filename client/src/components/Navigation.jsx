@@ -29,7 +29,7 @@ export default function Navigation() {
             </>
           )}
         <Nav className="header-basket"></Nav>
-          <Nav.Link href="/cart"><i className="fas fa-shopping-basket"><strong>(0)</strong></i></Nav.Link>
+          <Nav.Link href="/cart"><i className="fas fa-shopping-basket"><strong>(Cart Items)</strong></i></Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
