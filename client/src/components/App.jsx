@@ -1,7 +1,6 @@
 import React, { useState, Fragment } from 'react';
-// import './App.css';
+import './App.scss';
 import axios from "axios";
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,9 +10,11 @@ import {
 import Homepage from './Homepage';
 import Navigation from './Navigation';
 import About from './About';
-import Menu from './Menu';
-import Register from './register';
+import SearchCook from './SearchCook';
+import Register from './Register';
 import Login from './Login';
+import BuyerCart from './BuyerCart';
+import OrderPayment from './OrderPayment';
 
 export default function App() {
   //  const [show, setShow] = useState(REGISTER);
@@ -35,9 +36,9 @@ export default function App() {
   return (
     <Router>
       <div>
+        <div className="App">
         <Navigation/>
-          <div className="App">
-          </div>
+        </div>
         {/* A <Switch> looks through its children <Route>s and
         renders the first one that matches the current URL. */}
 
@@ -49,17 +50,29 @@ export default function App() {
             // profileInfo={state.profileInfo}
           />
           </Route>
-          <Route path="/menu">
-            <Menu />
+          <Route path="/register">
+            <Register />
+          </Route>
+          <Route path="/search_cook">
+            <SearchCook />
+          </Route>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/cart">
+            <BuyerCart />
+          </Route>
+          <Route path="/order_payment">
+            <OrderPayment />
           </Route>
           <Route path="/">
             <Homepage />
           </Route>
+
         </Switch>
 
       </div>
-
-      </Router>
+    </Router>
   )
 };
 
