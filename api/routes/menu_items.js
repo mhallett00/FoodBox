@@ -1,76 +1,6 @@
-var express = require('express');
+const express = require('express');
+const router = express.Router();
 const knex = require('../knex/knex');
-var router = express.Router();
-
-// static data
-const menu_items = [
-  {
-    name: "Poutine",
-    description: "Lorem ipsum",
-    image: "https://images.unsplash.com/photo-1586805608485-add336722759?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
-    quantity: 4,
-    price_cents: 899,
-    is_active: "Y"
-  },
-  {
-    name: "Spaghetti",
-    description: "Lorem ipsum",
-    image: "https://images.unsplash.com/photo-1548247661-3d7905940716?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80",
-    quantity: 6,
-    price_cents: 1499,
-    is_active: "N"
-  },
-  {
-    name: "Petit Poulet",
-    description: "Lorem ipsum",
-    image: "https://images.unsplash.com/photo-1532550907401-a500c9a57435?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
-    quantity: 0,
-    price_cents: 1699,
-    is_active: "N"
-  },
-  {
-    name: "Quiche",
-    description: "Lorem ipsum",
-    image: "https://images.unsplash.com/photo-1490556278693-b666672547a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
-    quantity: 2,
-    price_cents: 1699,
-    is_active: "N"
-  },
-  {
-    name: "Cassoulet",
-    description: "Lorem ipsum",
-    image: "https://images.unsplash.com/photo-1591386767153-987783380885?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
-    quantity: 3,
-    price_cents: 1099,
-    is_active: "Y"
-  },
-  {
-    name: "Confit De Canard",
-    description: "Lorem ipsum",
-    image: "https://images.unsplash.com/photo-1513623954575-263b061498a3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
-    quantity: 4,
-    price_cents: 2199,
-    is_active: "Y"
-  }
-]
-
-// /* GET menu_items listing. */
-// router.get('/', (req, res) => {
-  
-//   res.json({ menu_items: menu_items });
-//   console.log("Menu items data sent");
-// });
-
-// /* GET menu_items listing psql */
-// router.get('/', (req, res) => {
-//   knex('menu_items')
-//     .join('item_allergens', 'menu_items.id', 'item_allergens.menu_item_id')
-//     .join('allergens', 'allergens.id', 'item_allergens.allergen_id' )
-
-//     .then((todo) => {
-//       res.json(todo)
-//     });
-// });
 
 /* GET menu_items listing psql */
 router.get('/', (req, res) => {
@@ -82,34 +12,105 @@ router.get('/', (req, res) => {
       knex.raw('JSON_AGG(allergens.*) as allergens')
     ])
     .groupBy('menu_items.id')
-    .then((todo) => {
-      res.json(todo)
+    .then((menu_items) => {
+      res.json(menu_items)
+    })
+    .catch((err) => {
+      console.loge(err)
+    });
+
+});
+
+/* GET a menu item by ID */
+router.get('/:id', (req, res) => {
+  console.log(req.params.id)
+  knex('menu_items')
+    .leftJoin('item_allergens','menu_items.id','item_allergens.menu_item_id')
+    .leftJoin('allergens', 'allergens.id', 'item_allergens.allergen_id' )
+    .where('menu_items.id', req.params.id)
+    .select([
+      'menu_items.*',
+      knex.raw('JSON_AGG(allergens.*) as allergens')
+    ])
+    .groupBy('menu_items.id')
+    .then((menu_items) => {
+      res.json(menu_items)
+    })
+    .catch((err) => {
+      console.loge(err)
     });
 });
 
-/* GET a menu_items by ID */
-router.get('/:id', (req, res) => {
-  res.json(menu_items[req.params.id]);
-  console.log(`Menu item ${menu_items[req.params.id].name} sent`);
+/* GET a menu items by user */
+router.get('/users/:user_id', (req, res) => {
+  console.log(req.params.user_id)
+  knex('menu_items')
+    .leftJoin('item_allergens','menu_items.id','item_allergens.menu_item_id')
+    .leftJoin('allergens', 'allergens.id', 'item_allergens.allergen_id' )
+    .where('menu_items.user_id', req.params.user_id)
+    .select([
+      'menu_items.*',
+      knex.raw('JSON_AGG(allergens.*) as allergens')
+    ])
+    .groupBy('menu_items.user_id', 'menu_items.id')
+    .then((menu_items) => {
+      res.json(menu_items)
+    })
+    .catch((err) => {
+      console.loge(err)
+    });
 });
+
 
 /* POST add a new menu item */
 router.post('/', (req, res) => {
-
+  knex('menu_items')
+    .returning('id')
+    .insert(req.body)
+    .then(() => {
+      res.send('Item added!')
+    })
+    .catch((err) => {
+      console.log(err)
+    });
 });
 
-/* PUT edit a menu item */
-router.put('/:id', (req, res) => {
-  const { id } = req.params;
+/* POST edit a menu item */
+router.post('/:id', (req, res) => {
+  const { 
+    id,
+    name,
+    description,
+    image,
+    quantity,
+    price_cents,
+    is_active
+  } = req.params;
 
-  res.json({ deleted: id });
+  knex('menu_items')
+    .where('id', id)
+    .update(req.body)
+    .then(() => {
+      res.json('success!');
+    })
+    .catch((err) =>{
+      console.log(err);
+    });
+  
 });
 
 /* DELETE delete a menu item */
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
-
-  res.json({ deleted: id });
+  knex('menu_items')
+    .where('id', id)
+    .del()
+    .then(() => {
+      res.json('deleted!')
+    })
+    .catch((err) => {
+      console.loge(err)
+    });
 });
 
 module.exports = router;
