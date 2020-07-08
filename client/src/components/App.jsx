@@ -15,6 +15,7 @@ import Register from './Register';
 import Login from './Login';
 import BuyerCart from './BuyerCart';
 import OrderPayment from './OrderPayment';
+import OrderConfirm from './OrderConfirm';
 
 export default function App() {
   //  const [show, setShow] = useState(REGISTER);
@@ -64,6 +65,9 @@ export default function App() {
           </Route>
           <Route path="/order_payment">
             <OrderPayment />
+          </Route>
+          <Route path="/order_confirm">
+            <OrderConfirm />
           </Route>
           <Route path="/">
             <Homepage />
