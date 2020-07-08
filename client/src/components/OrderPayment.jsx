@@ -53,9 +53,7 @@ export default function OrderPayment() {
               </tr>
             </tbody>
           </Table>
-
           <PaymentDetails/>
-
           </div>
         </div>
 
