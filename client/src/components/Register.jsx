@@ -2,13 +2,15 @@ import React from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from "axios";
 
 export default function Register(props) {
+  const history = useHistory();
+
   const [state, setState] = useState({
     first_name: '',
-    last_name:'',
+    last_name: '',
     email: '',
     password: '',
     isHomeCook: true,
@@ -17,6 +19,7 @@ export default function Register(props) {
  
   const handleChange = (e) => {
     const {id, value} = e.target;
+    console.log('recording data', id, value);
     setState(prevState => {
       return {
         ...prevState,
@@ -26,10 +29,10 @@ export default function Register(props) {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    createUser();
+    createUser(state);
   }
 
-  const createUser = ({ name, email, password, isHomeCook, postalCode }) => {
+  const createUser = ({ first_name, last_name, email, password, isHomeCook, postalCode }) => {
     //axios.post('/api/users) (register route), payload will be state.name, state.email ...
     axios.post('/api/users', {
       
@@ -47,13 +50,13 @@ export default function Register(props) {
       <Form className="register-form">
         <h2 className="register-greeting">Create an account</h2>
         <p>Please fill in the required information to continue</p>
-        <Form.Group controlId="name">
+        <Form.Group controlId="first_name">
           <Form.Label>First Name</Form.Label>
-          <Form.Control type="name" placeholder="First Name" value={state.fist_name} onChange={handleChange}/>
+          <Form.Control type="first_name" placeholder="First Name" value={state.first_name} onChange={handleChange}/>
         </Form.Group>
-        <Form.Group controlId="name">
-        <Form.Label>Last Name</Form.Label>
-          <Form.Control type="name" placeholder="Last Name" value={state.last_name} onChange={handleChange}/>
+        <Form.Group controlId="last_name">
+          <Form.Label>Last Name</Form.Label>
+          <Form.Control type="last_name" placeholder="Last Name" value={state.last_name} onChange={handleChange}/>
         </Form.Group>
         <Form.Group controlId="email">
           <Form.Label>Email address</Form.Label>
