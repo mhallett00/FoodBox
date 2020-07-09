@@ -30,7 +30,14 @@ export default function App() {
   //  const [email, setEmail] = useState("");
   //  const [password, setPassword] = useState("");
   const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('token')) || "");
-   
+  
+  const logout = () => {
+    if (localStorage.getItem('token')) {
+      localStorage.removeItem('token')
+    }
+    setUserData = "";
+  }
+
   axios({
     method: "GET",
     url: "/api",
@@ -45,7 +52,7 @@ export default function App() {
     <Router>
       <div>
         <div className="App">
-        <Navigation userData={userData}/>
+        <Navigation userData={userData} logout={e => logout()}/>
         </div>
         {/* A <Switch> looks through its children <Route>s and
         renders the first one that matches the current URL. */}
