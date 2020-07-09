@@ -1,20 +1,39 @@
 import React from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { useState } from "react";
 
 export default function Register() {
+
+  const [state, setState] = useState({
+    email: '',
+    password: ''
+
+  })
+
+  const handleChange = (e) => {
+    const {id, value} = e.target;
+    console.log('recording data', id, value);
+    setState(prevState => {
+      return {
+        ...prevState,
+        [id]: value
+      }
+    }) 
+  }
+
   return (
     <Form className="login-form">
       <h2 className="login-greeting">Welcome Back!</h2>
       <p>Type in your email and password to continue</p>
-      <Form.Group controlId="formGroupEmail">
+      <Form.Group controlId="email">
         <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" />
-      </Form.Group>
-      <Form.Group controlId="formGroupPassword">
+        <Form.Control type="email" placeholder="Enter email" value={state.email} onChange={handleChange}/>
+        </Form.Group>
+      <Form.Group controlId="password">
         <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" />
-      </Form.Group>
+        <Form.Control type="password" placeholder="Password" value={state.password} onChange={handleChange}/>
+        </Form.Group>
       {/* sign  button */}
       <Button variant="dark" type="submit">
         Log In

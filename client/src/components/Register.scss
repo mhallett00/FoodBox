@@ -1,6 +1,14 @@
-.register-form {
-  
+.register-form-container {
+  display: grid;
+  justify-items: center;
+  .register-form {
+    width: 40%;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 2px;
+  }
   label .form-label {
     font-size: 2rem;
+    color: #f9f9f9;
   }
 }
