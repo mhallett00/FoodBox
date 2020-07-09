@@ -2,9 +2,11 @@ import React from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
 
-export default function Login() {
+export default function Login(props) {
+  const history = useHistory();
 
   const [state, setState] = useState({
     email: '',
@@ -29,6 +31,19 @@ export default function Login() {
 
   const loginUser = ({email, password}) => {
     //axios post to login route
+    axios.post('/api/sessions', {
+      email: email,
+      password_digest: password
+    })
+    .then(res => {
+      console.log(state)
+      localStorage.setItem('token', JSON.stringify(res.data));
+      props.setUserData(res.data);
+      history.push('/');
+    })
+    .catch((err) => {
+      console.log(err)
+    });
   }
 
   return (

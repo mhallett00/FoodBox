@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
 import { Link } from 'react-router-dom';
+import axios from "axios";
 
 export default function Register(props) {
   const [state, setState] = useState({
@@ -27,8 +28,17 @@ export default function Register(props) {
     createUser();
   }
 
-  const createUser = () => {
+  const createUser = ({ name, email, password, isHomeCook, postalCode }) => {
     //axios.post('/api/users) (register route), payload will be state.name, state.email ...
+    axios.post('/api/users', {
+      
+    })
+    .then(res => {
+      console.log(res.data);
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }
 
   return (

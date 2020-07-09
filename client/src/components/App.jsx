@@ -23,11 +23,13 @@ import SellerMenuEditItem from './SellerMenuEditItem';
 import SellerOrderDashboard from './SellerOrderDashboard';
 
 export default function App() {
+  
   //  const [show, setShow] = useState(REGISTER);
   //  const [firstName, setFirstName] = useState("");
   //  const [lastName, setLastName] = useState("");
   //  const [email, setEmail] = useState("");
   //  const [password, setPassword] = useState("");
+  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('token')) || "");
    
   axios({
     method: "GET",
@@ -43,7 +45,7 @@ export default function App() {
     <Router>
       <div>
         <div className="App">
-        <Navigation/>
+        <Navigation userData={userData}/>
         </div>
         {/* A <Switch> looks through its children <Route>s and
         renders the first one that matches the current URL. */}
@@ -51,6 +53,7 @@ export default function App() {
         <Switch>
           <Route path="/login">
             <Login
+              setUserData={setUserData}
             // SET_PROFILE_DATA={SET_PROFILE_DATA}
             // dispatch={dispatch}
             // profileInfo={state.profileInfo}
