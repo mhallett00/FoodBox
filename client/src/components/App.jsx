@@ -14,11 +14,13 @@ import SearchCook from './SearchCook';
 import Register from './Register';
 import Login from './Login';
 import BuyerCart from './BuyerCart';
+import BuyerDashboard from './BuyerDashboard';
 import OrderPayment from './OrderPayment';
 import OrderConfirm from './OrderConfirm';
 import SellerMenuList from './SellerMenuList';
 import SellerMenuAddItem from './SellerMenuAddItem';
 import SellerMenuEditItem from './SellerMenuEditItem';
+import SellerOrderDashboard from './SellerOrderDashboard';
 
 export default function App() {
   //  const [show, setShow] = useState(REGISTER);
@@ -71,6 +73,12 @@ export default function App() {
           </Route>
           <Route path="/order_confirm">
             <OrderConfirm />
+          </Route>
+          <Route path="/buyer_dashboard">
+            <BuyerDashboard />
+          </Route>
+          <Route path="/seller_dashboard">
+            <SellerOrderDashboard />
           </Route>
           <Route path="/seller_menu/add_item">
             <SellerMenuAddItem />
