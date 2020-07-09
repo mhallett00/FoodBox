@@ -68,7 +68,7 @@ router.post('/', (req, res) => {
     .returning('id')
     .insert(req.body)
     .then(() => {
-      res.send('Item added!')
+      res.json('Item added!')
     })
     .catch((err) => {
       console.log(err)
