@@ -21,7 +21,7 @@ export default function Navigation(props) {
             <>
               {/* <button className="logout-button" onClick={() => logoutUser()}>Logout</button> */}
               <Nav.Link href="/">logged in as {props.userData.email}</Nav.Link>
-              <Nav.Link className="react-links" href="/">Logout</Nav.Link>
+              <Nav.Link className="react-links" href="/" onClick={props.logout}>Logout</Nav.Link>
             </>
           )}
           {!localStorage.getItem('token') && (
