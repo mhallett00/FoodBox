@@ -6,8 +6,9 @@ const knex = require('../knex/knex');
 router.post('/', (req, res) => {
   knex('users')
     .insert(req.body)
-    .then(() => {
-      console.log("data inserted!");
+    .returning('*')
+    .then((user) => {
+      res.json(user)
     })
     .catch((err) => {
       console.log(err)
