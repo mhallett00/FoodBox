@@ -3,10 +3,12 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
 import { Link } from 'react-router-dom';
+import Axios from "axios";
 
 export default function Register(props) {
   const [state, setState] = useState({
-    name: '',
+    first_name: '',
+    last_name:'',
     email: '',
     password: '',
     isHomeCook: true,
@@ -27,8 +29,21 @@ export default function Register(props) {
     createUser();
   }
 
-  const createUser = () => {
+  const createUser = (first_name, last_name, email, password) => {
     //axios.post('/api/users) (register route), payload will be state.name, state.email ...
+    Axios.post('/api/users', {
+      first_name: state.first_name,
+      last_name: state.last_name,
+      email: state.email,
+      password_digest: state.password,
+      is_seller: state.isHomeCook,
+      postalCode: state.postalCode
+    })
+    .then((response) => {
+      console.log(response);
+    }, (error) => {
+      console.log(error);
+    });
   }
 
   return (
@@ -37,8 +52,12 @@ export default function Register(props) {
         <h2 className="register-greeting">Create an account</h2>
         <p>Please fill in the required information to continue</p>
         <Form.Group controlId="name">
-          <Form.Label>Name</Form.Label>
-          <Form.Control type="name" placeholder="Name" value={state.name} onChange={handleChange}/>
+          <Form.Label>First Name</Form.Label>
+          <Form.Control type="name" placeholder="First Name" value={state.fist_name} onChange={handleChange}/>
+        </Form.Group>
+        <Form.Group controlId="name">
+        <Form.Label>Last Name</Form.Label>
+          <Form.Control type="name" placeholder="Last Name" value={state.last_name} onChange={handleChange}/>
         </Form.Group>
         <Form.Group controlId="email">
           <Form.Label>Email address</Form.Label>

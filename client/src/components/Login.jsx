@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Login() {
 
@@ -29,6 +30,15 @@ export default function Login() {
 
   const loginUser = ({email, password}) => {
     //axios post to login route
+    axios.post('/api/sessions', {
+      email: state.email,
+      password_digest: state.password
+    })
+    .then ((response) => {
+      console.log(response);
+    },(error) => {
+      console.log(error);
+    });
   }
 
   return (

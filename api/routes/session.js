@@ -4,6 +4,7 @@ const knex = require('../knex/knex');
 
 /* POST user session creation. */
 router.post('/', function(req, res) {
+  console.log(req.body);
   if (req.body.email) {
     knex('users')
       .where('email', req.body.email)
