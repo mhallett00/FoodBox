@@ -30,33 +30,13 @@ router.post('/:id', (req, res) => {
     });
 });
 
-/* GET shopping cart contents by user id */
+/* GET shopping cart info details*/
 router.get('/:id', (req, res, next) => {
   console.log(req.params);
   const { id } = req.params;
   knex('carts')
   .first()
-    .where('buyer_id', id)
-    .then((cart) => {
-      if (!cart) {
-        next();
-      } else {
-        res.json(cart);
-      }
-
-    })
-    .catch((err) =>{
-      console.log(err);
-    });
-});
-
-/* GET shopping cart contents by cart id */
-router.get('/:id/items', (req, res, next) => {
-  console.log(req.params);
-  const { id } = req.params;
-  knex('cart_items', 'menu_items')
-  .join('menu_items', 'menu_items.id', 'cart_items.menu_item_id')
-    .where('cart_id', id)
+    .where('id', id)
     .then((cart) => {
         res.json(cart);
     })
@@ -68,12 +48,14 @@ router.get('/:id/items', (req, res, next) => {
 /* POST add item to cart */
 router.post('/:id/items', (req, res) => {
   knex('cart_items')
-  .insert({
-    cart_id: req.params.id,
-    menu_item_id: req.body.id
-  })
-    .then(() => {
-        res.json("item added!");
+    .insert({
+      cart_id: req.params.id,
+      menu_item_id: req.body.id
+    })
+    .returning('*')
+    .then((cart_item) => {
+      console.log("item added");
+        res.json(cart_item[0]);
     })
     .catch((err) =>{
       console.log(err);
@@ -81,15 +63,27 @@ router.post('/:id/items', (req, res) => {
 
 });
 
-/* PUT edit cart items */
-// router.put('/:id/carts/:cart_id', (req, res) => {
+/* GET shopping cart contents by cart id */
+router.get('/:id/items', (req, res) => {
+  console.log(req.params);
+  const { id } = req.params;
+  knex('cart_items')
+    .select('cart_items.*', 'menu_items.name', 'menu_items.description', 'menu_items.image', 'menu_items.price_cents', 'menu_items.is_active') 
+    .join('menu_items', 'menu_items.id', 'cart_items.menu_item_id')
+    .where('cart_id', id)
+    .then((cartContents) => {
+        res.json(cartContents)
+    })
+    .catch((err) =>{
+      console.log(err);
+    });
+});
 
-// });
 
 /* DELETE cart items */
 router.delete('/:id/items/:item_id', (req, res) => {
   knex('cart_items')
-  .where('menu_item_id', req.params.item_id)
+  .where('id', req.params.item_id)
   .first()
   .del()
     .then(() => {
