@@ -2,6 +2,7 @@ import React from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 
 export default function Register() {
 
@@ -26,12 +27,13 @@ export default function Register() {
     loginUser(state);
   }
 
-  loginUser = ({email, password}) => {
+  const loginUser = ({email, password}) => {
     //axios post to login route
   }
 
   return (
-    <Form className="login-form">
+    <div className='register-form-container'>
+      <Form className="register-form">
       <h2 className="login-greeting">Welcome Back!</h2>
       <p>Type in your email and password to continue</p>
       <Form.Group controlId="email">
@@ -50,9 +52,12 @@ export default function Register() {
       <h4 className="login-greeting register">New to Foodbox?</h4>
       <p>Please register to continue</p>
       <Button variant="dark" type="submit">
-        Register
+        <Link to='/register'>
+          Register
+        </Link>
       </Button>
     </Form>
+    </div>
   );
 }
 

@@ -2,6 +2,7 @@ import React from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 
 export default function Register(props) {
   const [state, setState] = useState({
@@ -66,7 +67,7 @@ export default function Register(props) {
         <Button variant="dark" type="submit" onClick={handleSubmit}>
           Register
         </Button>
-        <p><a href="/login">Have an account? Sign in.</a></p>
+        <p><Link to="/login">Have an account? Sign in.</Link></p>
       </Form>
     </div>
   );
