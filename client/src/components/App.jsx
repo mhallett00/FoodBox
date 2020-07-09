@@ -17,6 +17,8 @@ import BuyerCart from './BuyerCart';
 import OrderPayment from './OrderPayment';
 import OrderConfirm from './OrderConfirm';
 import SellerMenuList from './SellerMenuList';
+import SellerMenuAddItem from './SellerMenuAddItem';
+import SellerMenuEditItem from './SellerMenuEditItem';
 
 export default function App() {
   //  const [show, setShow] = useState(REGISTER);
@@ -69,6 +71,12 @@ export default function App() {
           </Route>
           <Route path="/order_confirm">
             <OrderConfirm />
+          </Route>
+          <Route path="/seller_menu/add_item">
+            <SellerMenuAddItem />
+          </Route>
+          <Route path="/seller_menu/edit_item">
+            <SellerMenuEditItem />
           </Route>
           <Route path="/seller_menu">
             <SellerMenuList />

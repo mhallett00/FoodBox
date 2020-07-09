@@ -9,7 +9,7 @@ export default function SellerMenuList() {
       <div className='seller-menu'>
         <h2>Home_Cook_Name's Menu Items</h2>
       </div>
-      <Button variant="dark" type="submit">
+      <Button href="/seller_menu/add_item" variant="dark" type="submit">
         Add Item
       </Button>
       <div className="seller-menu list">
