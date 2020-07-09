@@ -1,9 +1,16 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import Cooks from "./Cooks";
 import Map from "./Map";
 import MapWindow from "./Map";
 
 export default function CooksList(props) {
+
+  const [state, setState] = useState ({
+    
+
+  })
+
+
 
   return (
   <>

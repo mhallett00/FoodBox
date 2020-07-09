@@ -14,19 +14,30 @@ import SearchCook from './SearchCook';
 import Register from './Register';
 import Login from './Login';
 import BuyerCart from './BuyerCart';
+import BuyerDashboard from './BuyerDashboard';
 import OrderPayment from './OrderPayment';
 import OrderConfirm from './OrderConfirm';
 import SellerMenuList from './SellerMenuList';
 import SellerMenuAddItem from './SellerMenuAddItem';
 import SellerMenuEditItem from './SellerMenuEditItem';
+import SellerOrderDashboard from './SellerOrderDashboard';
 
 export default function App() {
+  
   //  const [show, setShow] = useState(REGISTER);
   //  const [firstName, setFirstName] = useState("");
   //  const [lastName, setLastName] = useState("");
   //  const [email, setEmail] = useState("");
   //  const [password, setPassword] = useState("");
-   
+  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('token')) || "");
+  
+  const logout = () => {
+    if (localStorage.getItem('token')) {
+      localStorage.removeItem('token')
+    }
+    setUserData = "";
+  }
+
   axios({
     method: "GET",
     url: "/api",
@@ -41,7 +52,7 @@ export default function App() {
     <Router>
       <div>
         <div className="App">
-        <Navigation/>
+        <Navigation userData={userData} logout={e => logout()}/>
         </div>
         {/* A <Switch> looks through its children <Route>s and
         renders the first one that matches the current URL. */}
@@ -49,6 +60,7 @@ export default function App() {
         <Switch>
           <Route path="/login">
             <Login
+              setUserData={setUserData}
             // SET_PROFILE_DATA={SET_PROFILE_DATA}
             // dispatch={dispatch}
             // profileInfo={state.profileInfo}
@@ -71,6 +83,12 @@ export default function App() {
           </Route>
           <Route path="/order_confirm">
             <OrderConfirm />
+          </Route>
+          <Route path="/buyer_dashboard">
+            <BuyerDashboard />
+          </Route>
+          <Route path="/seller_dashboard">
+            <SellerOrderDashboard />
           </Route>
           <Route path="/seller_menu/add_item">
             <SellerMenuAddItem />
