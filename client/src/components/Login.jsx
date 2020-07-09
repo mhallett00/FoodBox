@@ -21,6 +21,14 @@ export default function Register() {
       }
     }) 
   }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    loginUser(state);
+  }
+
+  loginUser = ({email, password}) => {
+    //axios post to login route
+  }
 
   return (
     <Form className="login-form">
@@ -35,7 +43,7 @@ export default function Register() {
         <Form.Control type="password" placeholder="Password" value={state.password} onChange={handleChange}/>
         </Form.Group>
       {/* sign  button */}
-      <Button variant="dark" type="submit">
+      <Button variant="dark" type="submit" onClick={handleSubmit}>
         Log In
       </Button>
       

@@ -21,6 +21,15 @@ export default function Register(props) {
       }
     }) 
   }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createUser();
+  }
+
+  const createUser = () => {
+    //axios.post('/api/users) (register route), payload will be state.name, state.email ...
+  }
+
   return (
     <div className='register-form-container'>
       <Form className="register-form">
@@ -54,7 +63,7 @@ export default function Register(props) {
           <Form.Control type="text" placeholder="Postal Code" value={state.postalCode} onChange={handleChange}/>
         </Form.Group>
         {/* sign up button */}
-        <Button variant="dark" type="submit">
+        <Button variant="dark" type="submit" onClick={handleSubmit}>
           Register
         </Button>
         <p><a href="/login">Have an account? Sign in.</a></p>
