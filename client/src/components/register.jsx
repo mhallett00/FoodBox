@@ -2,6 +2,7 @@ import React from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 
 export default function Register(props) {
   const [state, setState] = useState({
@@ -21,6 +22,15 @@ export default function Register(props) {
       }
     }) 
   }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createUser();
+  }
+
+  const createUser = () => {
+    //axios.post('/api/users) (register route), payload will be state.name, state.email ...
+  }
+
   return (
     <div className='register-form-container'>
       <Form className="register-form">
@@ -54,10 +64,10 @@ export default function Register(props) {
           <Form.Control type="text" placeholder="Postal Code" value={state.postalCode} onChange={handleChange}/>
         </Form.Group>
         {/* sign up button */}
-        <Button variant="dark" type="submit">
+        <Button variant="dark" type="submit" onClick={handleSubmit}>
           Register
         </Button>
-        <p><a href="/login">Have an account? Sign in.</a></p>
+        <p><Link to="/login">Have an account? Sign in.</Link></p>
       </Form>
     </div>
   );
