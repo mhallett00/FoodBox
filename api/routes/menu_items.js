@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
       res.json(menu_items)
     })
     .catch((err) => {
-      console.loge(err)
+      console.log(err)
     });
 
 });
@@ -37,7 +37,7 @@ router.get('/:id', (req, res) => {
       res.json(menu_items)
     })
     .catch((err) => {
-      console.loge(err)
+      console.log(err)
     });
 });
 
@@ -45,19 +45,12 @@ router.get('/:id', (req, res) => {
 router.get('/users/:user_id', (req, res) => {
   console.log(req.params.user_id)
   knex('menu_items')
-    .leftJoin('item_allergens','menu_items.id','item_allergens.menu_item_id')
-    .leftJoin('allergens', 'allergens.id', 'item_allergens.allergen_id' )
     .where('menu_items.user_id', req.params.user_id)
-    .select([
-      'menu_items.*',
-      knex.raw('JSON_AGG(allergens.*) as allergens')
-    ])
-    .groupBy('menu_items.user_id', 'menu_items.id')
     .then((menu_items) => {
       res.json(menu_items)
     })
     .catch((err) => {
-      console.loge(err)
+      console.log(err)
     });
 });
 
@@ -109,7 +102,7 @@ router.delete('/:id', (req, res) => {
       res.json('deleted!')
     })
     .catch((err) => {
-      console.loge(err)
+      console.log(err)
     });
 });
 
