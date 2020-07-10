@@ -93,7 +93,7 @@ export default function App() {
             <SellerOrderDashboard />
           </Route>
           <Route path="/seller_menu/add_item">
-            <SellerMenuAddItem />
+            <SellerMenuAddItem userData={userData}/>
           </Route>
           <Route path="/seller_menu/edit_item">
             <SellerMenuEditItem />
