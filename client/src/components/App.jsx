@@ -99,7 +99,7 @@ export default function App() {
             <SellerMenuEditItem />
           </Route>
           <Route path="/seller_menu">
-            <SellerMenuList />
+            <SellerMenuList userData={userData} />
           </Route>
           <Route path="/">
             <Homepage />
