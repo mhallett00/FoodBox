@@ -67,7 +67,9 @@ export default function App() {
           />
           </Route>
           <Route path="/register">
-            <Register />
+            <Register 
+              setUserData={setUserData}
+            />
           </Route>
           <Route path="/search_cook">
             <SearchCook />
