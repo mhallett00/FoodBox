@@ -42,7 +42,7 @@ export default function SellerMenuList(props) {
           description={menuItem.description}
           item_name={menuItem.name}
           is_active={menuItem.is_active}
-          image={props.image}
+          image={menuItem.image}
           price={menuItem.price_cents}
 
 
