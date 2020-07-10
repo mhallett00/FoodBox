@@ -1,14 +1,17 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import { propTypes } from 'react-bootstrap/esm/Image';
 
-export default function SellerMenuListItem() {
+export default function SellerMenuListItem(props) {
+
+console.log('listitemprops', props)
   return (
     <tr>
-      <td><img src=""/>Image Here</td>
+      <td><img src={props.image}/>Image Here</td>
       <td>
-        <h3>Mama Beth's Spring Rolls</h3>
-        <h5>Single order - 6 pieces</h5>
+        <h3>{props.seller_fn} {props.seller_ln}'s {props.item_name}</h3>
+        <h5></h5>
         <form action="/register method=POST" className="menu-availability">
         <h5>Available to Order?</h5>
         <div class="custom-control custom-radio">
@@ -27,8 +30,8 @@ export default function SellerMenuListItem() {
           Delete Item 
         </Button>
       </td>
-      <td colSpan="2">Food Description Here</td>
-      <td>$ price/unit</td>
+      <td colSpan="2">{props.description}</td>
+      <td>$ {props.price / 100}</td>
     </tr>
   );
 }
