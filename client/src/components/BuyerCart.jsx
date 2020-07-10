@@ -34,7 +34,8 @@ const BuyerListItemsData = [
   },
 ];
 
-export default function BuyerCart() {
+export default function BuyerCart(props) {
+  console.log("PROPS", props);
   
   const BuyerListItem = BuyerListItemsData.map((ListItem, index) => {
     return (
@@ -56,10 +57,6 @@ export default function BuyerCart() {
   BuyerListItem.forEach(ListItem => itemPriceArray.push(ListItem.props.price_cents))
   const reducer = (a, b) => a + b;
   let priceSubtotal = itemPriceArray.reduce(reducer);
-
-  const [subtotal, setSubtotal] = useState(priceSubtotal)
-
-
 
   return (
     <>
