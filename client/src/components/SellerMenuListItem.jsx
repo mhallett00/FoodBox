@@ -5,6 +5,7 @@ import { propTypes } from 'react-bootstrap/esm/Image';
 
 export default function SellerMenuListItem(props) {
 
+
 console.log('listitemprops', props)
   return (
     <tr>
@@ -23,10 +24,10 @@ console.log('listitemprops', props)
             <label class="custom-control-label" for="customRadio2">No</label>
           </div>
         </form>
-        <Button variant="dark" type="submit">
+        <Button variant="dark" href="/seller_menu/edit_item" type="submit">
           Edit Item
         </Button>
-        <Button variant="danger" type="submit">
+        <Button variant="danger" type="submit" onClick={props.onDelete}>
           Delete Item 
         </Button>
       </td>
