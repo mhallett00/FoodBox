@@ -1,10 +1,63 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import BuyerCartListItem from './BuyerCartListItem';
 
-export default function BuyerCart() {
+const BuyerListItemsData = [
+  {
+    name: "Spring Rolls",
+    image: "",
+    user_id: 1,
+    seller_name: "Mama Beth",
+    quantity: 1,
+    description: "description",
+    price_cents: 899
+  },
+  {
+    name: "Pancit",
+    image: "",
+    user_id: 1,
+    seller_name: "Mama Beth",
+    quantity: 1,
+    description: "description",
+    price_cents: 899
+  },
+  {
+    name: "Roasted Chicken",
+    image: "",
+    user_id: 1,
+    seller_name: "Mama Beth",
+    quantity: 1,
+    description: "description",
+    price_cents: 1099
+  },
+];
+
+export default function BuyerCart(props) {
+  console.log("PROPS", props);
+  
+  const BuyerListItem = BuyerListItemsData.map((ListItem, index) => {
+    return (
+      <BuyerCartListItem 
+        key={index}
+        name={ListItem.name} 
+        image={ListItem.image} 
+        user_id={ListItem.user_id} 
+        seller_name={ListItem.seller_name} 
+        quantity={ListItem.quantity} 
+        description={ListItem.description} 
+        price_cents={ListItem.price_cents} 
+      />
+    )
+  })
+
+  // subtotal price calculator 
+  const itemPriceArray = [] 
+  BuyerListItem.forEach(ListItem => itemPriceArray.push(ListItem.props.price_cents))
+  const reducer = (a, b) => a + b;
+  let priceSubtotal = itemPriceArray.reduce(reducer);
+
   return (
     <>
       <div className='buyer-cart'>
@@ -24,7 +77,7 @@ export default function BuyerCart() {
             </tr>
           </thead>
           <tbody>
-            <BuyerCartListItem/>
+            { BuyerListItem }            
           </tbody>
         </Table>
         <div className="buyer-cart subtotal">
@@ -33,8 +86,8 @@ export default function BuyerCart() {
             <tr>
               <td>Subtotal</td>
               <td></td>
-              <td></td>
-              <td colSpan="2">$ Price Subtotal Show</td>
+              <td colSpan="2"></td>
+              <td>${priceSubtotal}</td>
             </tr>
           </tbody>
         </Table>

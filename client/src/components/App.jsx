@@ -20,6 +20,7 @@ import OrderConfirm from './OrderConfirm';
 import SellerMenuList from './SellerMenuList';
 import SellerMenuAddItem from './SellerMenuAddItem';
 import SellerMenuEditItem from './SellerMenuEditItem';
+import SellerMenuOrderList from './SellerMenuOrderList';
 import SellerOrderDashboard from './SellerOrderDashboard';
 
 export default function App() {
@@ -97,6 +98,9 @@ export default function App() {
           </Route>
           <Route path="/seller_menu/edit_item">
             <SellerMenuEditItem />
+          </Route>
+          <Route path="/seller_menu/order">
+            <SellerMenuOrderList userData={userData}/>
           </Route>
           <Route path="/seller_menu">
             <SellerMenuList userData={userData} />
