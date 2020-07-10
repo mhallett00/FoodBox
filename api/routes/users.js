@@ -16,4 +16,16 @@ router.post('/', (req, res) => {
     })
 });
 
+/* GET all sellers */
+router.get('/', (req, res) => {
+  knex('users')
+    .where('is_seller', true)
+    .then((users) => {
+      res.json(users);
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+})
+
 module.exports = router;
