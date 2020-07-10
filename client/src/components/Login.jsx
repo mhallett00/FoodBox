@@ -36,7 +36,8 @@ export default function Login(props) {
       password_digest: password
     })
     .then(res => {
-      console.log(state)
+      console.log('state:', state)
+      console.log('data:', res.data)
       localStorage.setItem('token', JSON.stringify(res.data));
       props.setUserData(res.data);
       history.push('/');
