@@ -8,7 +8,7 @@ export default function SellerMenuListItem(props) {
 console.log('listitemprops', props)
   return (
     <tr>
-      <td><img src={props.image}/>Image Here</td>
+      <td><img src={props.image} width="120vw" heigh="90vh"/></td>
       <td>
         <h3>{props.seller_fn} {props.seller_ln}'s {props.item_name}</h3>
         <h5></h5>
