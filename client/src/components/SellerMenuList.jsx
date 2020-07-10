@@ -6,8 +6,9 @@ import axios from 'axios';
 
 export default function SellerMenuList(props) {
 
-  console.log("PROPS:", props)
   const [menuData, setMenuData] = useState();
+  console.log("PROPS:", props)
+  console.log("STATE;", menuData)
 
   const { 
     id,
@@ -27,6 +28,22 @@ export default function SellerMenuList(props) {
     
   }
 
+  const delMenuItem = (item_id) => {
+    const newMenuData = menuData.filter((item) => {
+     return item.id !== item_id;
+    });
+    
+    axios.delete(`api/menu_items/${item_id}`)
+    .then(() => {
+      setMenuData(() => {
+        return newMenuData
+      })
+    })
+    .catch((err) => {
+      console.log(err)
+    });
+  }
+
   useEffect(() => {
     getMenuItems(id);
   }, []);
@@ -44,8 +61,8 @@ export default function SellerMenuList(props) {
           is_active={menuItem.is_active}
           image={menuItem.image}
           price={menuItem.price_cents}
-
-
+          onDelete={() => delMenuItem(menuItem.id)}
+          // onEdit={() => editMenuItem(menuItem.id)}
         />
       );
     })
@@ -77,7 +94,3 @@ export default function SellerMenuList(props) {
     </>
   );
 }
-
-
-
-
