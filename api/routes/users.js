@@ -7,6 +7,7 @@ router.post('/', (req, res) => {
   knex('users')
     .insert(req.body)
     .returning('*')
+    .first()
     .then((user) => {
       res.json(user)
     })
