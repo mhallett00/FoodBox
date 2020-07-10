@@ -2,15 +2,19 @@ import React from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from "axios";
 
 export default function Register(props) {
+
+  const history = useHistory();
+
   const [state, setState] = useState({
-    name: '',
+    first_name: '',
+    last_name: '',
     email: '',
     password: '',
-    isHomeCook: true,
+    isHomeCook: false,
     postalCode: ''
   })
  
@@ -25,16 +29,25 @@ export default function Register(props) {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    createUser();
+    createUser(state);
   }
 
-  const createUser = ({ name, email, password, isHomeCook, postalCode }) => {
+  const createUser = ({ first_name, last_name, email, password, isHomeCook, postalCode }) => {
     //axios.post('/api/users) (register route), payload will be state.name, state.email ...
     axios.post('/api/users', {
-      
+      first_name,
+      last_name,
+      email,
+      password_digest: password,
+      is_seller: isHomeCook,
+      seller_postcode: postalCode
     })
     .then(res => {
-      console.log(res.data);
+      console.log('state:', state)
+      console.log('data:', res.data[0]);
+      localStorage.setItem('token', JSON.stringify(res.data[0]));
+      props.setUserData(res.data[0]);
+      history.push('/');
     })
     .catch(err => {
       console.log(err);
@@ -46,9 +59,13 @@ export default function Register(props) {
       <Form className="register-form">
         <h2 className="register-greeting">Create an account</h2>
         <p>Please fill in the required information to continue</p>
-        <Form.Group controlId="name">
-          <Form.Label>Name</Form.Label>
-          <Form.Control type="name" placeholder="Name" value={state.name} onChange={handleChange}/>
+        <Form.Group controlId="first_name">
+          <Form.Label>First name</Form.Label>
+          <Form.Control type="first_name" placeholder="First name" value={state.first_name} onChange={handleChange}/>
+        </Form.Group>
+        <Form.Group controlId="last_name">
+          <Form.Label>Last name</Form.Label>
+          <Form.Control type="last_name" placeholder=" Last name" value={state.last_name} onChange={handleChange}/>
         </Form.Group>
         <Form.Group controlId="email">
           <Form.Label>Email address</Form.Label>
@@ -64,7 +81,7 @@ export default function Register(props) {
             <p>Are you interested in joining to become a home cook?</p>
             <input type='radio' id='isHomeCook' value="true" checked={state.isHomeCook == 'true'} onChange={handleChange}/>
             <label>Yes, count me in!</label><br/>
-            <input type='radio' value="false" id='isHomeCook' checked={state.isHomeCook == 'false'} onChange={handleChange}/>
+            <input type='radio' id='isHomeCook' value="false" checked={state.isHomeCook == 'false'} onChange={handleChange}/>
             <label>No, just feed me!</label><br/>  
           </div>
   
