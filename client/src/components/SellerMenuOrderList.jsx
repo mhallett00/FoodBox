@@ -3,11 +3,13 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import SellerMenuOrderListItem from './SellerMenuOrderListItem';
 import axios from 'axios';
+import SellerMenuListItem from "./SellerMenuListItem";
 
 export default function SellerMenuList(props) {
 
   console.log("PROPS:", props)
   const [menuData, setMenuData] = useState();
+  const [cartItem, setCartItem] = useState();
 
   const { 
     id,
@@ -37,6 +39,7 @@ export default function SellerMenuList(props) {
       return(
         <SellerMenuOrderListItem
           key={menuItem.id}
+          id={menuItem.id}
           seller_fn={first_name}
           seller_ln={last_name}
           description={menuItem.description}
@@ -44,8 +47,7 @@ export default function SellerMenuList(props) {
           is_active={menuItem.is_active}
           image={props.image}
           price={menuItem.price_cents}
-
-
+          addCartItem={props.addCartItem}
         />
       );
     })

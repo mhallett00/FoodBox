@@ -4,59 +4,34 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import BuyerCartListItem from './BuyerCartListItem';
 
-const BuyerListItemsData = [
-  {
-    name: "Spring Rolls",
-    image: "",
-    user_id: 1,
-    seller_name: "Mama Beth",
-    quantity: 1,
-    description: "description",
-    price_cents: 899
-  },
-  {
-    name: "Pancit",
-    image: "",
-    user_id: 1,
-    seller_name: "Mama Beth",
-    quantity: 1,
-    description: "description",
-    price_cents: 899
-  },
-  {
-    name: "Roasted Chicken",
-    image: "",
-    user_id: 1,
-    seller_name: "Mama Beth",
-    quantity: 1,
-    description: "description",
-    price_cents: 1099
-  },
-];
 
 export default function BuyerCart(props) {
-  console.log("PROPS", props);
-  
-  const BuyerListItem = BuyerListItemsData.map((ListItem, index) => {
+  console.log("cart items >>>>", props)
+  const BuyerListItem = props.cartItems.map((ListItem, index) => {
     return (
       <BuyerCartListItem 
         key={index}
-        name={ListItem.name} 
+        id={ListItem.id}
+        item_name={ListItem.item_name} 
         image={ListItem.image} 
         user_id={ListItem.user_id} 
-        seller_name={ListItem.seller_name} 
+        seller_fn={ListItem.seller_fn} 
+        seller_ln={ListItem.seller_ln} 
         quantity={ListItem.quantity} 
         description={ListItem.description} 
-        price_cents={ListItem.price_cents} 
+        price={ListItem.price} 
+        removeCartItem={props.removeCartItem}
       />
     )
   })
 
   // subtotal price calculator 
-  const itemPriceArray = [] 
-  BuyerListItem.forEach(ListItem => itemPriceArray.push(ListItem.props.price_cents))
-  const reducer = (a, b) => a + b;
-  let priceSubtotal = itemPriceArray.reduce(reducer);
+  const priceSubtotal = () => {
+    const itemPriceArray = [] 
+    BuyerListItem.forEach(ListItem => itemPriceArray.push(ListItem.props.price))
+    const reducer = (a, b) => a + b;
+    return itemPriceArray.reduce(reducer);
+  }
 
   return (
     <>
@@ -87,7 +62,7 @@ export default function BuyerCart(props) {
               <td>Subtotal</td>
               <td></td>
               <td colSpan="2"></td>
-              <td>${priceSubtotal}</td>
+              <td>${priceSubtotal()/100}</td>
             </tr>
           </tbody>
         </Table>

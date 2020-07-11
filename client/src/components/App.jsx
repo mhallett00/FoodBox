@@ -22,6 +22,7 @@ import SellerMenuAddItem from './SellerMenuAddItem';
 import SellerMenuEditItem from './SellerMenuEditItem';
 import SellerMenuOrderList from './SellerMenuOrderList';
 import SellerOrderDashboard from './SellerOrderDashboard';
+import useStickyState from './useStickyState';
 
 export default function App() {
   
@@ -31,6 +32,18 @@ export default function App() {
   //  const [email, setEmail] = useState("");
   //  const [password, setPassword] = useState("");
   const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('token')) || "");
+  const [cartItems, setCartItems] = useStickyState(["cartItems"])
+
+  const addCartItem = (item) => {
+    setCartItems([...cartItems, item]);
+  };
+
+  const removeCartItem = (index) => {
+    let itemsInCart = [...cartItems];
+
+    itemsInCart.splice(index, 1)
+    setCartItems([...itemsInCart]);
+  };
   
   const logout = () => {
     if (localStorage.getItem('token')) {
@@ -79,7 +92,7 @@ export default function App() {
             <About />
           </Route>
           <Route path="/cart">
-            <BuyerCart />
+            <BuyerCart removeCartItem ={removeCartItem} cartItems={cartItems}/>
           </Route>
           <Route path="/order_payment">
             <OrderPayment />
@@ -100,7 +113,7 @@ export default function App() {
             <SellerMenuEditItem />
           </Route>
           <Route path="/seller_menu/order">
-            <SellerMenuOrderList userData={userData}/>
+            <SellerMenuOrderList addCartItem={addCartItem} userData={userData}/>
           </Route>
           <Route path="/seller_menu">
             <SellerMenuList userData={userData} />
