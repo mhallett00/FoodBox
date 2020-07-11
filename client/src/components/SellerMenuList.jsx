@@ -60,6 +60,7 @@ export default function SellerMenuList(props) {
           item_name={menuItem.name}
           is_active={menuItem.is_active}
           image={menuItem.image}
+          quantity={menuItem.quantity}
           price={menuItem.price_cents}
           onDelete={() => delMenuItem(menuItem.id)}
           // onEdit={() => editMenuItem(menuItem.id)}

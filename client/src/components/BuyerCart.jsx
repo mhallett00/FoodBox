@@ -7,6 +7,7 @@ import BuyerCartListItem from './BuyerCartListItem';
 
 export default function BuyerCart(props) {
   console.log("cart items >>>>", props)
+
   const BuyerListItem = props.cartItems.map((ListItem, index) => {
     return (
       <BuyerCartListItem 
@@ -17,7 +18,6 @@ export default function BuyerCart(props) {
         user_id={ListItem.user_id} 
         seller_fn={ListItem.seller_fn} 
         seller_ln={ListItem.seller_ln} 
-        quantity={ListItem.quantity} 
         description={ListItem.description} 
         price={ListItem.price} 
         removeCartItem={props.removeCartItem}
@@ -28,9 +28,13 @@ export default function BuyerCart(props) {
   // subtotal price calculator 
   const priceSubtotal = () => {
     const itemPriceArray = [] 
-    BuyerListItem.forEach(ListItem => itemPriceArray.push(ListItem.props.price))
-    const reducer = (a, b) => a + b;
-    return itemPriceArray.reduce(reducer);
+    if (!BuyerCartListItem) {
+      return 0;
+    } else {
+      BuyerListItem.forEach(ListItem => itemPriceArray.push(ListItem.props.price))
+      const reducer = (a, b) => a + b;
+      return itemPriceArray.reduce(reducer);
+    }
   }
 
   return (

@@ -47,6 +47,7 @@ export default function SellerMenuList(props) {
           is_active={menuItem.is_active}
           image={props.image}
           price={menuItem.price_cents}
+          quantity={menuItem.quantity}
           addCartItem={props.addCartItem}
         />
       );

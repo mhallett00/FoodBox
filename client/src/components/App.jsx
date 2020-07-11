@@ -95,7 +95,7 @@ export default function App() {
             <BuyerCart removeCartItem ={removeCartItem} cartItems={cartItems}/>
           </Route>
           <Route path="/order_payment">
-            <OrderPayment />
+            <OrderPayment cartItems={cartItems}/>
           </Route>
           <Route path="/order_confirm">
             <OrderConfirm />
