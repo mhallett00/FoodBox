@@ -7,12 +7,14 @@ import PaymentDetails from './PaymentDetails';
 
 export default function OrderPayment(props) {
 
-  const OrderListItem = props.cartItems.map((ListItem, index) => {
+  const OrderListItem = props.cartItems
+  ? props.cartItems.map((ListItem, index) => {
     return (
       <OrderPaymentListItem 
         key={index}
         id={ListItem.id}
-        item_name={ListItem.item_name} 
+        item_name={ListItem.item_name}
+        quantity={ListItem.order_quantity} 
         image={ListItem.image} 
         user_id={ListItem.user_id} 
         seller_fn={ListItem.seller_fn} 
@@ -23,6 +25,7 @@ export default function OrderPayment(props) {
       />
     )
   })
+  : "No order items!";
 
   const priceSubtotal = () => {
     const itemPriceArray = [] 
@@ -64,6 +67,7 @@ export default function OrderPayment(props) {
         <Table borderless hover>
           <thead>
             <tr>
+              <th>Image</th>
               <th>Items</th>
               <th>Quantity</th>
               <th colSpan="2">Description</th>

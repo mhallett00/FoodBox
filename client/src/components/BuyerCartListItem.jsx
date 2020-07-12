@@ -5,8 +5,16 @@ import useStickyState from './useStickyState';
 
 
 export default function BuyerCartListItem(props) {
-  const { item_name, seller_fn, seller_ln, image, id, description, price, removeCartItem } = props;
-  const [ quantity, setQuantity ] = useState(1);
+  const { key, item_name, seller_fn, seller_ln, image, id, description, price, removeCartItem, updateQty} = props;
+  // const [ quantity, setQuantity ] = useState(1);
+
+  // const addOne = () => {
+  //   updateQty(id, order_quanitity + 1)
+  // }
+  
+  // const subtractOne = () => {
+  //   updateQty(id, order_quanitity - 1)
+  // }
 
   return (
     
@@ -16,17 +24,26 @@ export default function BuyerCartListItem(props) {
         <h3>{seller_fn} {seller_ln}'s {item_name}</h3>
         <h5>Single order - 6 pieces</h5>
         <ButtonGroup aria-label="Basic example">
-          <Button variant="light" disabled={quantity <= 0} onClick={(id) => setQuantity(quantity- 1)}>-</Button>
-          <Button variant="light">{quantity}</Button>
-          <Button variant="light" onClick={(id) => setQuantity(quantity+ 1)}>+</Button>
+          <Button variant="light" 
+            disabled={props.decOrderQuantity === 0} 
+            onClick={props.decOrderQuantity}
+            // onClick={subtractOne}
+          >-</Button>
+          <Button variant="light">{props.order_quantity}</Button>
+          <Button variant="light"
+            onClick={props.incOrderQuantity}
+            // onClick={addOne}
+          >+</Button>
         </ButtonGroup>
         <br/>
-        <Button onClick={() => removeCartItem(props)} variant="dark" type="submit">
+        <Button onClick={props.removeCartItem} variant="dark" type="submit">
           Remove
         </Button>
       </td>
       <td colSpan="2">{description}</td>
-      <td>${(quantity * price)/100}</td>
+      <td>
+        ${(props.order_quantity * price)/100}
+        </td>
     </tr>
     
   );

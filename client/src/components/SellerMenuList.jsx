@@ -49,11 +49,10 @@ export default function SellerMenuList(props) {
   }, []);
 
   const sellerMenuItems = menuData
-    ? menuData.map((menuItem) => {
-      console.log('menu_item:', menuItem)
+    ? menuData.map((menuItem, index) => {
       return(
         <SellerMenuListItem
-          key={menuItem.id}
+          key={index}
           seller_fn={first_name}
           seller_ln={last_name}
           description={menuItem.description}
