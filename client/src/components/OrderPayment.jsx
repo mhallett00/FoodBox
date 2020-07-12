@@ -22,8 +22,7 @@ export default function OrderPayment(props) {
         seller_fn={ListItem.seller_fn} 
         seller_ln={ListItem.seller_ln} 
         description={ListItem.description} 
-        price={ListItem.price} 
-        removeCartItem={props.removeCartItem}
+        price={ListItem.price}
       />
     )
   })
