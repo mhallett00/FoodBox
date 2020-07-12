@@ -1,32 +1,84 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Table from 'react-bootstrap/Table';
+
 import BuyerDashboardOrderListItem from './BuyerDashboardOrderListItem';
 import BuyerDashboardHistoryListItem from './BuyerDashboardHistoryListItem';
+import axios from 'axios';
 
-export default function BuyerDashboard() {
+export default function BuyerDashboard(props) {
+
+  const [ orderHistory, setOrderHistory ] = useState();
+
+  const { 
+    id,
+    first_name,
+    last_name
+  } = props.userData;
+
+  const getOrderHistory = (user_id) => {
+    axios.get(`/api/orders/users/${user_id}`)
+    .then(res => {
+      setOrderHistory(res.data)
+    })
+    .catch((err) => {
+      console.log(err)
+    });
+    
+  }
+
+  useEffect(() => {
+    getOrderHistory(id);
+  }, []);
+
+  const completeOrders = orderHistory
+    ? orderHistory.map((orderId, index) => {
+      return(
+        orderId.completed ?
+          <BuyerDashboardHistoryListItem
+            key={index}
+            menuItems={orderId.menu_items}
+            order_id={orderId.id}
+            order_total={orderId.order_total}
+          />
+        : "no orders!"
+      );
+    })
+    : "No orders!";
+
+    const upcomingOrders = orderHistory
+    ? orderHistory.map((orderId, index) => {
+      return(
+        !orderId.completed ?
+        <BuyerDashboardOrderListItem
+        key={index}
+        menuItems={orderId.menu_items}
+        order_id={orderId.id}
+        order_total={orderId.order_total}
+        />
+        : "no orders!"
+      );
+    })
+    : "No menu!";  
+
+    console.log(orderHistory)
+
   return (
     <>
       <div className='buyer-dashboard'>
-        <h2>Welcome, BUYER_EMAIL!</h2>
-      </div>
-      <div className='buyer-dashboard upcoming'>
-        <h4>You have an upcoming delivery today from SELLER_NAME</h4>
+        <h2>Welcome, {first_name}!</h2>
       </div>
       <div className="buyer-dashboard list">
         <div className="buyer-dashboard upcoming_list">
           <Table striped borderless hover>
             <thead>
               <tr>
-                <th>Order Quantity</th>
-                <th>Item Name</th>
-                <th>Order Id</th>
-                <th>Seller Name</th>
-                <th>Delivery Address</th>
-                <th>Cancel</th>
+                <th>Order id</th>
+                <th>Items</th>
+                <th> Order Total</th>
               </tr>
             </thead>
             <tbody>
-              <BuyerDashboardOrderListItem/>
+              {upcomingOrders}
             </tbody>
           </Table>
         </div>
@@ -37,16 +89,13 @@ export default function BuyerDashboard() {
           <Table striped borderless hover>
             <thead>
               <tr>
-                <th>Order Quantity</th>
-                <th>Item Name</th>
                 <th>Order Id</th>
-                <th>Seller Name</th>
-                <th>Delivery Address</th>
+                <th>Items</th>
                 <th>Date Delivered</th>
               </tr>
             </thead>
             <tbody>
-              <BuyerDashboardHistoryListItem/>
+              {completeOrders}
             </tbody>
           </Table>
         </div>
