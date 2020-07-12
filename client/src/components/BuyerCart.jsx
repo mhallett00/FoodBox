@@ -6,9 +6,41 @@ import BuyerCartListItem from './BuyerCartListItem';
 
 
 export default function BuyerCart(props) {
-  console.log("cart items >>>>", props)
+  console.log("cart items >>>>", props.cartItems)
+  
+  const { setCartItems, cartItems, removeCartItem } = props;
 
-  const BuyerListItem = props.cartItems.map((ListItem, index) => {
+  // const updateQty = (id, newQty) => {
+  //   const newItems = props.cartItems.map(item => {
+  //     if (item.id === id) {
+  //       return {...item, order_quantity: newQty}
+  //     }
+  //     return item;
+  //   })
+  // }
+
+  const incOrderQuantity = (index) => {
+
+    let newCartItems = [...cartItems];
+
+    newCartItems[index].order_quantity ++;
+
+    setCartItems(newCartItems)
+  };
+
+  const decOrderQuantity = (index) => {
+    let newCartItems = [...cartItems];
+
+    if (newCartItems[index].order_quantity > 0) {
+      newCartItems[index].order_quantity --;
+      setCartItems(newCartItems)
+    }
+    if (newCartItems[index].order_quantity <= 0) {
+      removeCartItem();
+    }
+  };
+
+  const BuyerListItem = props.cartItems ? props.cartItems.map((ListItem, index) => {
     return (
       <BuyerCartListItem 
         key={index}
@@ -18,20 +50,26 @@ export default function BuyerCart(props) {
         user_id={ListItem.user_id} 
         seller_fn={ListItem.seller_fn} 
         seller_ln={ListItem.seller_ln} 
-        description={ListItem.description} 
+        description={ListItem.description}
+        order_quantity={ListItem.order_quantity} 
         price={ListItem.price} 
-        removeCartItem={props.removeCartItem}
+        removeCartItem={() => removeCartItem(index)}
+        incOrderQuantity={() => incOrderQuantity(index)}
+        decOrderQuantity={() => decOrderQuantity(index)}
+        // updateQty={updateQty}
       />
     )
   })
+  :
+  "no cart items!"
 
   // subtotal price calculator 
-  const priceSubtotal = () => {
-    const itemPriceArray = [] 
-    if (!BuyerCartListItem) {
+  const priceSubtotal = () => { 
+    const itemPriceArray = [];
+    if (props.cartItems.length === 0) {
       return 0;
     } else {
-      BuyerListItem.forEach(ListItem => itemPriceArray.push(ListItem.props.price))
+      props.cartItems.forEach(ListItem => itemPriceArray.push(ListItem.price * ListItem.order_quantity))
       const reducer = (a, b) => a + b;
       return itemPriceArray.reduce(reducer);
     }
