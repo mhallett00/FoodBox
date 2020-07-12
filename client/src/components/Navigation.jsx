@@ -6,7 +6,8 @@ import Nav from 'react-bootstrap/Nav';
 
 export default function Navigation(props) {
 
-  const { cartItems } = props;
+  const { cartItems, userData } = props;
+
   return (
     <Navbar bg="light" expand="lg">
       <Navbar.Brand className="header-logo" href="/">F O O D B O X</Navbar.Brand>
@@ -14,14 +15,14 @@ export default function Navigation(props) {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="/">About</Nav.Link>
-          <Nav.Link href="/search_cook">Menu</Nav.Link>
+          <Nav.Link href="/search_cook">Order</Nav.Link>
+          {userData.is_seller && <Nav.Link href="/seller_menu">Your Menu</Nav.Link>}
         </Nav>
         <Nav className="header-login">
           {localStorage.getItem('token') && (
             <>
               {/* <button className="logout-button" onClick={() => logoutUser()}>Logout</button> */}
-              <Nav.Link href="/">logged in as {props.userData.email}</Nav.Link>
+              <Nav.Link href="/">logged in as {userData.email}</Nav.Link>
               <Nav.Link className="react-links" href="/" onClick={props.logout}>Logout</Nav.Link>
             </>
           )}

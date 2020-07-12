@@ -10,18 +10,18 @@ export function priceSubtotal(items) {
 }
 
 export function GST(subtotal) {
-  return ((subtotal * 0.05)/100).toFixed(2);
+  return ((subtotal * 0.05));
 }
 
 export function QST(subtotal) {
-  return ((subtotal * 0.0995)/100).toFixed(2);
+  return ((subtotal * 0.0995));
 }
 
 export function deliveryFee() {
-  return (2).toFixed(2);
+  return (2);
 }
 
-export function totalPrice(subtotal) {
-  let total = (subtotal + (subtotal * 0.1495)).toFixed(2);
+export function totalPrice(subtotal, delivery) {
+  let total = ((subtotal + delivery + (subtotal * 0.1495)));
   return total;
 }
