@@ -16,13 +16,18 @@ export default function Navigation(props) {
         <Nav className="mr-auto">
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/search_cook">Order</Nav.Link>
-          {userData.is_seller && <Nav.Link href="/seller_menu">Your Menu</Nav.Link>}
+          {userData.is_seller && (
+            <>
+              <Nav.Link href="/seller_menu">Your Menu</Nav.Link>
+              <Nav.Link href="/seller_dashboard">Dashboard</Nav.Link>
+            </>
+            )}
         </Nav>
         <Nav className="header-login">
           {localStorage.getItem('token') && (
             <>
               {/* <button className="logout-button" onClick={() => logoutUser()}>Logout</button> */}
-              <Nav.Link href="/">logged in as {userData.email}</Nav.Link>
+              <Nav.Link href="/buyer_dashboard">logged in as {userData.email}</Nav.Link>
               <Nav.Link className="react-links" href="/" onClick={props.logout}>Logout</Nav.Link>
             </>
           )}

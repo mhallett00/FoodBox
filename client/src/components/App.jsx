@@ -121,10 +121,10 @@ export default function App() {
             <OrderConfirm />
           </Route>
           <Route path="/buyer_dashboard">
-            <BuyerDashboard />
+            <BuyerDashboard userData={userData}/>
           </Route>
           <Route path="/seller_dashboard">
-            <SellerOrderDashboard />
+            <SellerOrderDashboard userData={userData}/>
           </Route>
           <Route path="/seller_menu/add_item">
             <SellerMenuAddItem userData={userData}/>
