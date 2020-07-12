@@ -87,14 +87,14 @@ export default function BuyerCart(props) {
         <Table hover>
           <thead>
             <tr>
+              <th>Image</th>
               <th>Items</th>
-              <th>Quantity</th>
               <th colSpan="2">Description</th>
               <th>Price</th>
             </tr>
           </thead>
           <tbody>
-            { BuyerListItem }            
+            {BuyerListItem}       
           </tbody>
         </Table>
         <div className="buyer-cart subtotal">

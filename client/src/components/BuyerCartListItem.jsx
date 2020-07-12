@@ -10,7 +10,7 @@ export default function BuyerCartListItem(props) {
   return (
     
     <tr>
-      <td><img src=""/>{image}</td>
+      <td><img src={image} width="120vw" heigh="90vh"/></td>
       <td>
         <h3>{seller_fn} {seller_ln}'s {item_name}</h3>
         <h5>Single order - 6 pieces</h5>

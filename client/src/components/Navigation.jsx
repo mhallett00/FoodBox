@@ -5,6 +5,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
 export default function Navigation(props) {
+
+  const { cartItems } = props;
   return (
     <Navbar bg="light" expand="lg">
       <Navbar.Brand className="header-logo" href="/">F O O D B O X</Navbar.Brand>
@@ -30,7 +32,7 @@ export default function Navigation(props) {
             </>
           )}
         <Nav className="header-basket"></Nav>
-          <Nav.Link href="/cart"><i className="fas fa-shopping-basket"><strong>(Cart Items)</strong></i></Nav.Link>
+          <Nav.Link href="/cart"><i className="fas fa-shopping-basket"><strong>(Cart Items ({cartItems.length}))</strong></i></Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

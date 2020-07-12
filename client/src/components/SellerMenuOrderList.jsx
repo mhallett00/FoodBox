@@ -4,11 +4,15 @@ import Button from 'react-bootstrap/Button';
 import SellerMenuOrderListItem from './SellerMenuOrderListItem';
 import axios from 'axios';
 
-export default function SellerMenuList(props) {
+export default function SellerMenuOrderList(props) {
 
+  const { addCartItem } = props;
   const [menuData, setMenuData] = useState();
 
+  console.log(props)
+
   const {
+    id,
     first_name,
     last_name
   } = props.userData;
@@ -16,6 +20,7 @@ export default function SellerMenuList(props) {
   const getMenuItems = (user_id) => {
     axios.get(`/api/menu_items/users/${user_id}`)
     .then(res => {
+      console.log("axios get", res.data)
       setMenuData(res.data)
     })
     .catch((err) => {
@@ -24,16 +29,16 @@ export default function SellerMenuList(props) {
     
   }
 
-  useEffect((id) => {
+  useEffect(() => {
     getMenuItems(id);
   }, []);
 
   const SellerMenuOrderListItems = menuData
-    ? menuData.map((menuItem) => {
-
+    ? menuData.map((menuItem, index) => {
+      console.log("CARTITEM:", menuItem)
       return(
         <SellerMenuOrderListItem
-          key={menuItem.id}
+          key={index}
           id={menuItem.id}
           seller_fn={first_name}
           seller_ln={last_name}
@@ -43,7 +48,7 @@ export default function SellerMenuList(props) {
           is_active={menuItem.is_active}
           price={menuItem.price_cents}
           quantity={menuItem.quantity}
-          addCartItem={props.addCartItem}
+          addCartItem={addCartItem}
         />
       );
     })
@@ -64,9 +69,8 @@ export default function SellerMenuList(props) {
               <th>Price</th>
             </tr>
           </thead>
-          <tbody>
-            {SellerMenuOrderListItems}
-          </tbody>
+          <tbody>{SellerMenuOrderListItems}
+            </tbody>
         </Table>
       </div>
     </>

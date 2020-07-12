@@ -18,7 +18,7 @@ export function QST(subtotal) {
 }
 
 export function deliveryFee() {
-  return (2)
+  return (2).toFixed(2);
 }
 
 export function totalPrice(subtotal) {
