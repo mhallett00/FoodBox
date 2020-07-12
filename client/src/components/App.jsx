@@ -32,11 +32,28 @@ export default function App() {
   //  const [email, setEmail] = useState("");
   //  const [password, setPassword] = useState("");
   const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('token')) || "");
-  const [cartItems, setCartItems] = useStickyState(["cartItems"])
+  const [cartItems, setCartItems] = useStickyState([])
 
   const addCartItem = (item) => {
-    setCartItems([...cartItems, item]);
+    setCartItems([...cartItems, {
+      ...item,
+      order_quantity: 1
+    }]);
   };
+
+  // const incOrderQuantity = (item, index) => {
+  //   setCartItems([...cartItems, {
+  //     ...item[index],
+  //     order_quantity: + 1
+  //   }]);
+  // };
+
+  // const decOrderQuantity = (item, index) => {
+  //   setCartItems([...cartItems, {
+  //     ...item[index],
+  //     order_quantity: - 1
+  //   }]);
+  // };
 
   const removeCartItem = (index) => {
     let itemsInCart = [...cartItems];
@@ -44,10 +61,13 @@ export default function App() {
     itemsInCart.splice(index, 1)
     setCartItems([...itemsInCart]);
   };
+
+  
   
   const logout = () => {
     if (localStorage.getItem('token')) {
       localStorage.removeItem('token')
+      localStorage.removeItem('undefined');
     }
     setUserData = "";
   }
@@ -92,7 +112,12 @@ export default function App() {
             <About />
           </Route>
           <Route path="/cart">
-            <BuyerCart removeCartItem ={removeCartItem} cartItems={cartItems}/>
+            <BuyerCart 
+              removeCartItem={removeCartItem} 
+              cartItems={cartItems}
+              setCartItems={setCartItems}
+
+            />
           </Route>
           <Route path="/order_payment">
             <OrderPayment cartItems={cartItems}/>
