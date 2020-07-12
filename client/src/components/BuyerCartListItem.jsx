@@ -1,20 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import useStickyState from './useStickyState';
 
 
 export default function BuyerCartListItem(props) {
-  const { key, item_name, seller_fn, seller_ln, image, id, description, price, removeCartItem, updateQty} = props;
-  // const [ quantity, setQuantity ] = useState(1);
-
-  // const addOne = () => {
-  //   updateQty(id, order_quanitity + 1)
-  // }
-  
-  // const subtractOne = () => {
-  //   updateQty(id, order_quanitity - 1)
-  // }
+  const {item_name, seller_fn, seller_ln, image, id, description, price, removeCartItem} = props;
 
   return (
     
@@ -36,7 +27,7 @@ export default function BuyerCartListItem(props) {
           >+</Button>
         </ButtonGroup>
         <br/>
-        <Button onClick={props.removeCartItem} variant="dark" type="submit">
+        <Button onClick={removeCartItem} variant="dark" type="submit">
           Remove
         </Button>
       </td>

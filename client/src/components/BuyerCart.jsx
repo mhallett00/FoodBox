@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import BuyerCartListItem from './BuyerCartListItem';
-
+import { priceSubtotal } from '../helpers/price_calcs'
 
 export default function BuyerCart(props) {
-  console.log("cart items >>>>", props.cartItems)
   
   const { setCartItems, cartItems, removeCartItem } = props;
 
@@ -63,17 +62,18 @@ export default function BuyerCart(props) {
   :
   "no cart items!"
 
-  // subtotal price calculator 
-  const priceSubtotal = () => { 
-    const itemPriceArray = [];
-    if (props.cartItems.length === 0) {
-      return 0;
-    } else {
-      props.cartItems.forEach(ListItem => itemPriceArray.push(ListItem.price * ListItem.order_quantity))
-      const reducer = (a, b) => a + b;
-      return itemPriceArray.reduce(reducer);
-    }
-  }
+  // subtotal price calculator
+
+  // const priceSubtotal = () => { 
+  //   const itemPriceArray = [];
+  //   if (props.cartItems.length === 0) {
+  //     return 0;
+  //   } else {
+  //     props.cartItems.forEach(ListItem => itemPriceArray.push(ListItem.price * ListItem.order_quantity))
+  //     const reducer = (a, b) => a + b;
+  //     return itemPriceArray.reduce(reducer);
+  //   }
+  // }
 
   return (
     <>
@@ -104,7 +104,7 @@ export default function BuyerCart(props) {
               <td>Subtotal</td>
               <td></td>
               <td colSpan="2"></td>
-              <td>${priceSubtotal()/100}</td>
+              <td>${priceSubtotal(cartItems)/100}</td>
             </tr>
           </tbody>
         </Table>

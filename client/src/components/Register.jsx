@@ -43,8 +43,6 @@ export default function Register(props) {
       seller_postcode: postalCode
     })
     .then(res => {
-      console.log('state:', state)
-      console.log('data:', res.data[0]);
       localStorage.setItem('token', JSON.stringify(res.data[0]));
       props.setUserData(res.data[0]);
       history.push('/');

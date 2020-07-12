@@ -1,12 +1,10 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import { propTypes } from 'react-bootstrap/esm/Image';
+// import ButtonGroup from 'react-bootstrap/ButtonGroup';
+// import { propTypes } from 'react-bootstrap/esm/Image';
 
 export default function SellerMenuListItem(props) {
 
-
-console.log('listitemprops', props)
   return (
     <tr>
       <td><img src={props.image} width="120vw" heigh="90vh"/></td>
@@ -15,13 +13,13 @@ console.log('listitemprops', props)
         <h5></h5>
         <form action="/register method=POST" className="menu-availability">
         <h5>Available to Order?</h5>
-        <div class="custom-control custom-radio">
+        <div className="custom-control custom-radio">
             <input type="radio" id="customRadio1" name="customRadio" className="custom-control-input"/>
             <label className="custom-control-label yes" >Yes</label>
           </div>
-          <div class="custom-control custom-radio">
+          <div className="custom-control custom-radio">
             <input type="radio" id="customRadio2" name="customRadio" className="custom-control-input"/>
-            <label class="custom-control-label" for="customRadio2">No</label>
+            <label className="custom-control-label" htmlFor="customRadio2">No</label>
           </div>
         </form>
         <Button variant="dark" href="/seller_menu/edit_item" type="submit">

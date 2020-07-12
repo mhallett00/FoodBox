@@ -8,8 +8,6 @@ export default function PaymentDetails() {
   return (
     <div>
       <h3>Payment Details</h3> 
-
-      <Form>
         <Form.Group controlId="formBasicFullName">
           <Form.Label>Full Name</Form.Label>
           <Form.Control type="username" placeholder="Cardholder's Name" />
@@ -35,7 +33,6 @@ export default function PaymentDetails() {
         <Button variant="dark" type="submit">
           Pay Now
         </Button>
-      </Form>
     </div>
   );
 }

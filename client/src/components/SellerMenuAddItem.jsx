@@ -42,7 +42,6 @@ export default function SellerMenuAddItem(props) {
     price,
     is_active,
   }) => {
-   console.log("USER ID", userData.id)
     axios.post('/api/menu_items', {
       user_id: userData.id,
       name,

@@ -4,10 +4,12 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import OrderPaymentListItem from './OrderPaymentListItem';
 import PaymentDetails from './PaymentDetails';
+import {priceSubtotal, GST, QST, deliveryFee, totalPrice} from '../helpers/price_calcs'
 
 export default function OrderPayment(props) {
 
-  const OrderListItem = props.cartItems
+  const { cartItems } = props;
+  const OrderListItem = cartItems
   ? props.cartItems.map((ListItem, index) => {
     return (
       <OrderPaymentListItem 
@@ -27,33 +29,33 @@ export default function OrderPayment(props) {
   })
   : "No order items!";
 
-  const priceSubtotal = () => {
-    const itemPriceArray = [] 
-    if (!OrderListItem) {
-      return 0;
-    } else {
-      OrderListItem.forEach(ListItem => itemPriceArray.push(ListItem.props.price))
-      const reducer = (a, b) => a + b;
-      return itemPriceArray.reduce(reducer);
-    }
-  }
+  // const priceSubtotal = () => {
+  //   const itemPriceArray = [] 
+  //   if (!OrderListItem) {
+  //     return 0;
+  //   } else {
+  //     OrderListItem.forEach(ListItem => itemPriceArray.push(ListItem.props.price))
+  //     const reducer = (a, b) => a + b;
+  //     return itemPriceArray.reduce(reducer);
+  //   }
+  // }
 
-  const GST = (subtotal) => {
-    return ((subtotal() * 0.05)/100).toFixed(2);
-  }
+  // const GST = (subtotal) => {
+  //   return ((subtotal * 0.05)/100).toFixed(2);
+  // }
 
-  const QST = (subtotal) => {
-    return ((subtotal() * 0.0995)/100).toFixed(2);
-  }
+  // const QST = (subtotal) => {
+  //   return ((subtotal * 0.0995)/100).toFixed(2);
+  // }
 
-  const deliveryFee = () => {
-    return (2)
-  }
+  // const deliveryFee = () => {
+  //   return (2)
+  // }
 
-  const totalPrice = (subtotal) => {
-    let total = (subtotal + (subtotal * 0.1495)).toFixed(2);
-    return total;
-  }
+  // const totalPrice = (subtotal) => {
+  //   let total = (subtotal + (subtotal * 0.1495)).toFixed(2);
+  //   return total;
+  // }
 
   return (
     <>
@@ -83,15 +85,15 @@ export default function OrderPayment(props) {
             <tbody>
               <tr>
                 <td>Subtotal</td>
-                <td>${priceSubtotal()/100} </td>
+                <td>${priceSubtotal(cartItems)/100} </td>
               </tr>
               <tr>
                 <td>GST</td>
-                <td>${GST(priceSubtotal)}</td>
+                <td>${GST(priceSubtotal(cartItems))}</td>
               </tr>
               <tr>              
                 <td>QST</td>
-                <td>${QST(priceSubtotal)}</td>
+                <td>${QST(priceSubtotal(cartItems))}</td>
               </tr>
               <tr> 
                 <td>Delivery</td>
@@ -99,7 +101,7 @@ export default function OrderPayment(props) {
               </tr>
               <tr> 
                 <td><h4>Total</h4></td>
-                <td><h4>${totalPrice(priceSubtotal()/100)}</h4></td>
+                <td><h4>${totalPrice(priceSubtotal(cartItems)/100)}</h4></td>
               </tr>
             </tbody>
           </Table>

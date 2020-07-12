@@ -7,8 +7,6 @@ import axios from 'axios';
 export default function SellerMenuList(props) {
 
   const [menuData, setMenuData] = useState();
-  console.log("PROPS:", props)
-  console.log("STATE;", menuData)
 
   const { 
     id,
@@ -19,7 +17,6 @@ export default function SellerMenuList(props) {
   const getMenuItems = (user_id) => {
     axios.get(`/api/menu_items/users/${user_id}`)
     .then(res => {
-      console.log('data:', res.data)
       setMenuData(res.data)
     })
     .catch((err) => {
@@ -62,7 +59,6 @@ export default function SellerMenuList(props) {
           quantity={menuItem.quantity}
           price={menuItem.price_cents}
           onDelete={() => delMenuItem(menuItem.id)}
-          // onEdit={() => editMenuItem(menuItem.id)}
         />
       );
     })
@@ -86,9 +82,7 @@ export default function SellerMenuList(props) {
               <th>Price</th>
             </tr>
           </thead>
-          <tbody>
-            {sellerMenuItems}
-          </tbody>
+          <tbody>{sellerMenuItems}</tbody>
         </Table>
       </div>
     </>
