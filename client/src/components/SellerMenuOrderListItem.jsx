@@ -4,11 +4,11 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { propTypes } from 'react-bootstrap/esm/Image';
 
 export default function SellerMenuOrderListItem(props) {
-  const { image, seller_fn, seller_ln, item_name, quantity, description, price, addCartItem, id } = props;
+  const { seller_fn, seller_ln, item_name, quantity, description, price, addCartItem, id } = props;
   console.log("THIS IS THE PROPS>>>>>", props)
   return (
     <tr>
-      <td><img src={image}/>Image Here</td>
+      <td><img src={props.image}/></td>
       <td>
         <h3>{seller_fn} {seller_ln}'s {item_name}</h3>
         <h5></h5>
