@@ -1,21 +1,23 @@
 import React, { Component } from "react";
 import Cooks from "./Cooks";
 import Map from "./Map";
-import MapWindow from "./Map";
 
-export default function CooksList(props) {
-
+export default function SearchCook() {
   return (
-  <>
-    <Map/>
-    <h2>SearchCook</h2>
-      <section className="cooks">
-        <h4 className="cooks__header text--light">Cooks near me</h4>
-        <ol className="cooks__list"><Cooks/></ol>
-      </section>
-  </>
+    <div className="search-cook-container">
+      <div className="search-cook">
+        <p>What's available near me?</p>
+
+        <input type="text" />
+      </div>
+      <div style={{ width: "50vw", height: "50vh" }}>
+        <Map
+          googleMapURL={`https://maps.googleapis.com/maps/api/js?key=AIzaSyBs_0ctuC56zLKgVqXHXsnzoX_ImnBeaMM&v=3.exp&libraries=geometry,drawing,places`}
+          loadingElement={<div style={{ height: "100%" }} />}
+          containerElement={<div style={{ height: "100%" }} />}
+          mapElement={<div style={{ height: "100%" }} />}
+        ></Map>
+      </div>
+    </div>
   );
 }
- 
-
- 
