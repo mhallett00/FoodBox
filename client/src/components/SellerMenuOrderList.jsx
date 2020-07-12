@@ -10,6 +10,7 @@ export default function SellerMenuList(props) {
   console.log("PROPS:", props)
   const [menuData, setMenuData] = useState();
   const [cartItem, setCartItem] = useState();
+  console.log("MENUDATA", menuData)
 
   const { 
     id,
@@ -36,12 +37,14 @@ export default function SellerMenuList(props) {
   const SellerMenuOrderListItems = menuData
     ? menuData.map((menuItem) => {
       console.log('menu_item:', menuItem)
+
       return(
         <SellerMenuOrderListItem
           key={menuItem.id}
           id={menuItem.id}
           seller_fn={first_name}
           seller_ln={last_name}
+          image={menuItem.image}
           description={menuItem.description}
           item_name={menuItem.name}
           is_active={menuItem.is_active}
