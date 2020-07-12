@@ -4,8 +4,6 @@ import React from "react";
 export default function OrderPaymentListItem(props) {
   const { item_name, seller_fn, seller_ln, image, id, description, price, quantity } = props;
 
-  console.log(props)
-
   return (
     <tr>
       <td><img src={image} width="120vw" heigh="90vh"/></td>

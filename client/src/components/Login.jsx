@@ -16,7 +16,6 @@ export default function Login(props) {
 
   const handleChange = (e) => {
     const {id, value} = e.target;
-    console.log('recording data', id, value);
     setState(prevState => {
       return {
         ...prevState,
@@ -36,8 +35,6 @@ export default function Login(props) {
       password_digest: password
     })
     .then(res => {
-      console.log('state:', state)
-      console.log('data:', res.data)
       localStorage.setItem('token', JSON.stringify(res.data));
       props.setUserData(res.data);
       history.push('/');

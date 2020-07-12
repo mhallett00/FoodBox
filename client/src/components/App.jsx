@@ -1,11 +1,10 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import './App.scss';
 import axios from "axios";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import Homepage from './Homepage';
 import Navigation from './Navigation';

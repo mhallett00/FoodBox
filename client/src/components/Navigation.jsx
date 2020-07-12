@@ -5,7 +5,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
 export default function Navigation(props) {
-  console.log(props)
   return (
     <Navbar bg="light" expand="lg">
       <Navbar.Brand className="header-logo" href="/">F O O D B O X</Navbar.Brand>
