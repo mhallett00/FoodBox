@@ -4,10 +4,13 @@ import CardDecks from "./CardDecks";
 import Main from "./Main";
 
 
-export default function Homepage() {
+export default function Homepage(props) {
+
+  const { userData } = props;
+  
   return (
   <div>
-    <Main/>
+    <Main userData={userData}/>
     <CardDecks/>
   </div>
   )
