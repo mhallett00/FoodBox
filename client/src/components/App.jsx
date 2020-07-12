@@ -23,6 +23,12 @@ import SellerMenuOrderList from './SellerMenuOrderList';
 import SellerOrderDashboard from './SellerOrderDashboard';
 import useStickyState from './useStickyState';
 
+// Stripe payment system
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+
+const stripePromise = loadStripe('pk_test_51GxIzcKCiGdjBgOYHqjQI2yN2oMA4VuPqvavGh8XsISbxK0koKUSGl5c1k9fnyVmzpetNP5pmMxFw3BmY8Pt2ovs004aIpuq1G');
+
 export default function App() {
   
   //  const [show, setShow] = useState(REGISTER);
@@ -31,7 +37,7 @@ export default function App() {
   //  const [email, setEmail] = useState("");
   //  const [password, setPassword] = useState("");
   const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('token')) || "");
-  const [cartItems, setCartItems] = useStickyState([]);
+  const [cartItems, setCartItems] = useStickyState([], 'cart');
 
   const addCartItem = (item) => {
     setCartItems([...cartItems, {
@@ -51,7 +57,7 @@ export default function App() {
   const logout = () => {
     if (localStorage.getItem('token')) {
       localStorage.removeItem('token')
-      localStorage.removeItem('undefined');
+      localStorage.removeItem('cart');
     }
     setUserData = "";
   }
@@ -100,11 +106,16 @@ export default function App() {
               removeCartItem={removeCartItem} 
               cartItems={cartItems}
               setCartItems={setCartItems}
-
             />
           </Route>
           <Route path="/order_payment">
-            <OrderPayment cartItems={cartItems}/>
+            <Elements stripe={stripePromise}>
+              <OrderPayment 
+                userData={userData} 
+                setCartItems={setCartItems} 
+                cartItems={cartItems}
+              />
+            </Elements>
           </Route>
           <Route path="/order_confirm">
             <OrderConfirm />
@@ -131,7 +142,7 @@ export default function App() {
             <SellerMenuList userData={userData} />
           </Route>
           <Route path="/">
-            <Homepage />
+            <Homepage userData={userData}/>
           </Route>
 
         </Switch>
