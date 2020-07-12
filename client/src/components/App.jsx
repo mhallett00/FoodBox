@@ -31,7 +31,7 @@ export default function App() {
   //  const [email, setEmail] = useState("");
   //  const [password, setPassword] = useState("");
   const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('token')) || "");
-  const [cartItems, setCartItems] = useStickyState([])
+  const [cartItems, setCartItems] = useStickyState([]);
 
   const addCartItem = (item) => {
     setCartItems([...cartItems, {
@@ -40,20 +40,6 @@ export default function App() {
     }]);
   };
 
-  // const incOrderQuantity = (item, index) => {
-  //   setCartItems([...cartItems, {
-  //     ...item[index],
-  //     order_quantity: + 1
-  //   }]);
-  // };
-
-  // const decOrderQuantity = (item, index) => {
-  //   setCartItems([...cartItems, {
-  //     ...item[index],
-  //     order_quantity: - 1
-  //   }]);
-  // };
-
   const removeCartItem = (index) => {
     let itemsInCart = [...cartItems];
 
@@ -61,8 +47,7 @@ export default function App() {
     setCartItems([...itemsInCart]);
   };
 
-  
-  
+    
   const logout = () => {
     if (localStorage.getItem('token')) {
       localStorage.removeItem('token')
@@ -85,7 +70,7 @@ export default function App() {
     <Router>
       <div>
         <div className="App">
-        <Navigation userData={userData} logout={e => logout()}/>
+        <Navigation userData={userData} logout={e => logout()} cartItems={cartItems}/>
         </div>
         {/* A <Switch> looks through its children <Route>s and
         renders the first one that matches the current URL. */}
@@ -137,7 +122,10 @@ export default function App() {
             <SellerMenuEditItem />
           </Route>
           <Route path="/seller_menu/order">
-            <SellerMenuOrderList addCartItem={addCartItem} userData={userData}/>
+            <SellerMenuOrderList 
+              addCartItem={addCartItem}
+              userData={userData}
+            />
           </Route>
           <Route path="/seller_menu">
             <SellerMenuList userData={userData} />
