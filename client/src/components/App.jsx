@@ -29,7 +29,7 @@ import CreateCart from './CreateCart';
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 
-const stripePromise = loadStripe('pk_test_51GxK2EFjdfjgcidOJRFut1KmR2wihbdrukB6yshUqRlP1QtTna5ZRjYTGcgFgg1wwvVf5c4vNp3mw8FCRVq3dUnW0034b3GyjS');
+const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
 export default function App() {
   
