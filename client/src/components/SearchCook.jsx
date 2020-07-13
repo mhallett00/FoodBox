@@ -7,8 +7,7 @@ export default function SearchCook() {
     <div className="search-cook-container">
       <div className="search-cook">
         <p>What's available near me?</p>
-
-        <input type="text" />
+        <input />
       </div>
       <div style={{ width: "50vw", height: "50vh" }}>
         <Map

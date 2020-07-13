@@ -1,5 +1,6 @@
 /*global google*/
 import React from "react";
+import Geocode from "react-geocode";
 import {
   GoogleMap,
   withScriptjs,
@@ -10,23 +11,42 @@ import {
 //@TODO - defaultCenter = userLocation?
 
 function getLatLngByZipcode(zipcode) {
-  var geocoder = new google.maps.Geocoder();
+  Geocode.setApiKey("AIzaSyBs_0ctuC56zLKgVqXHXsnzoX_ImnBeaMM");
+  // var geocoder = new google.maps.Geocoder();
   var address = zipcode;
-  geocoder.geocode({ address: "zipcode " + address }, function (
-    results,
-    status
-  ) {
-    if (status == google.maps.GeocoderStatus.OK) {
-      var latitude = results[0].geometry.location.lat();
-      var longitude = results[0].geometry.location.lng();
-      console.log("Latitude: " + latitude + "\nLongitude: " + longitude);
-    } else {
-      alert("Request failed.");
-    }
-  });
+  // geocoder.geocode({ address: "zipcode " + address }, function (
+  //   results,
+  //   status
+  // ) {
+  Geocode.fromAddress(
+    address,
+    "AIzaSyBs_0ctuC56zLKgVqXHXsnzoX_ImnBeaMM"
+  ).then((res) => console.log(res));
+
+  // console.log(status, "STATUS");
+  //   if (status == google.maps.GeocoderStatus.OK) {
+  //     var latitude = results[0].geometry.location.lat();
+  //     var longitude = results[0].geometry.location.lng();
+  //     console.log("Latitude: " + latitude + "\nLongitude: " + longitude);
+  //   } else {
+  //     console.log("Request failed.");
+  //   }
+  // });
   // return [latitude, longitude];
 }
 getLatLngByZipcode("H3C0R6");
+
+// Geocode.fromAddress("Eiffel Tower").then(
+//   (response) => {
+//     console.log(response);
+//     const { lat, lng } = response.results[0].geometry.location;
+//     console.log(lat, lng, "location found");
+//   },
+//   (error) => {
+//     console.error(error, "GEOCODE ERROR");
+//   }
+// );
+
 function Map() {
   return (
     <GoogleMap
@@ -36,6 +56,6 @@ function Map() {
   );
 }
 
-const WrappedMap = withScriptjs(withGoogleMap(Map));
+const WrappedMap = withGoogleMap(Map);
 
 export default WrappedMap;
