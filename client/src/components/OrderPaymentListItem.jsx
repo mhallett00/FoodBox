@@ -1,18 +1,20 @@
 import React from "react";
 
 
-export default function OrderPaymentListItem() {
+export default function OrderPaymentListItem(props) {
+  const { item_name, seller_fn, seller_ln, image, id, description, price, quantity } = props;
+
   return (
     <tr>
-      <td><img src=""/>Image Here</td>
+      <td><img src={image} width="120vw" heigh="90vh"/></td>
       <td>
-        <h3>Mama Beth's Spring Rolls</h3>
-        <h5>Single order - 6 pieces</h5>
-        <h5>Quantity</h5>
-        <h6>Order Quantity Here</h6>
+        <h3>{seller_fn} {seller_ln}'s {item_name}</h3>
       </td>
-      <td colSpan="2">Food Description Here</td>
-      <td>$ price/unit</td>
+      <td>
+        <h6>{quantity}</h6>
+      </td>
+      <td colSpan="2">{description}</td>
+      <td>${price/100}</td>
     </tr>
   );
 }

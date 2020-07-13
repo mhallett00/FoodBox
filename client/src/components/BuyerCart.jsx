@@ -1,65 +1,79 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import BuyerCartListItem from './BuyerCartListItem';
+import { priceSubtotal } from '../helpers/price_calcs'
 
-const BuyerListItemsData = [
-  {
-    name: "Spring Rolls",
-    image: "",
-    user_id: 1,
-    seller_name: "Mama Beth",
-    quantity: 1,
-    description: "description",
-    price_cents: 899
-  },
-  {
-    name: "Pancit",
-    image: "",
-    user_id: 1,
-    seller_name: "Mama Beth",
-    quantity: 1,
-    description: "description",
-    price_cents: 899
-  },
-  {
-    name: "Roasted Chicken",
-    image: "",
-    user_id: 1,
-    seller_name: "Mama Beth",
-    quantity: 1,
-    description: "description",
-    price_cents: 1099
-  },
-];
-
-export default function BuyerCart() {
+export default function BuyerCart(props) {
   
-  const BuyerListItem = BuyerListItemsData.map((ListItem, index) => {
+  const { setCartItems, cartItems, removeCartItem } = props;
+
+  // const updateQty = (id, newQty) => {
+  //   const newItems = props.cartItems.map(item => {
+  //     if (item.id === id) {
+  //       return {...item, order_quantity: newQty}
+  //     }
+  //     return item;
+  //   })
+  // }
+
+  const incOrderQuantity = (index) => {
+
+    let newCartItems = [...cartItems];
+
+    newCartItems[index].order_quantity ++;
+
+    setCartItems(newCartItems)
+  };
+
+  const decOrderQuantity = (index) => {
+    let newCartItems = [...cartItems];
+
+    if (newCartItems[index].order_quantity > 0) {
+      newCartItems[index].order_quantity --;
+      setCartItems(newCartItems)
+    }
+    if (newCartItems[index].order_quantity <= 0) {
+      removeCartItem();
+    }
+  };
+
+  const BuyerListItem = props.cartItems ? props.cartItems.map((ListItem, index) => {
     return (
       <BuyerCartListItem 
         key={index}
-        name={ListItem.name} 
+        id={ListItem.id}
+        item_name={ListItem.item_name} 
         image={ListItem.image} 
         user_id={ListItem.user_id} 
-        seller_name={ListItem.seller_name} 
-        quantity={ListItem.quantity} 
-        description={ListItem.description} 
-        price_cents={ListItem.price_cents} 
+        seller_fn={ListItem.seller_fn} 
+        seller_ln={ListItem.seller_ln} 
+        description={ListItem.description}
+        order_quantity={ListItem.order_quantity} 
+        price={ListItem.price} 
+        removeCartItem={() => removeCartItem(index)}
+        incOrderQuantity={() => incOrderQuantity(index)}
+        decOrderQuantity={() => decOrderQuantity(index)}
+        // updateQty={updateQty}
       />
     )
   })
+  :
+  "no cart items!"
 
-  // subtotal price calculator 
-  const itemPriceArray = [] 
-  BuyerListItem.forEach(ListItem => itemPriceArray.push(ListItem.props.price_cents))
-  const reducer = (a, b) => a + b;
-  let priceSubtotal = itemPriceArray.reduce(reducer);
+  // subtotal price calculator
 
-  const [subtotal, setSubtotal] = useState(priceSubtotal)
-
-
+  // const priceSubtotal = () => { 
+  //   const itemPriceArray = [];
+  //   if (props.cartItems.length === 0) {
+  //     return 0;
+  //   } else {
+  //     props.cartItems.forEach(ListItem => itemPriceArray.push(ListItem.price * ListItem.order_quantity))
+  //     const reducer = (a, b) => a + b;
+  //     return itemPriceArray.reduce(reducer);
+  //   }
+  // }
 
   return (
     <>
@@ -73,14 +87,14 @@ export default function BuyerCart() {
         <Table hover>
           <thead>
             <tr>
+              <th>Image</th>
               <th>Items</th>
-              <th>Quantity</th>
               <th colSpan="2">Description</th>
               <th>Price</th>
             </tr>
           </thead>
           <tbody>
-            { BuyerListItem }            
+            {BuyerListItem}       
           </tbody>
         </Table>
         <div className="buyer-cart subtotal">
@@ -90,7 +104,7 @@ export default function BuyerCart() {
               <td>Subtotal</td>
               <td></td>
               <td colSpan="2"></td>
-              <td>${priceSubtotal}</td>
+              <td>${priceSubtotal(cartItems)/100}</td>
             </tr>
           </tbody>
         </Table>

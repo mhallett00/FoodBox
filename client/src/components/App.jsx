@@ -1,11 +1,10 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import './App.scss';
 import axios from "axios";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import Homepage from './Homepage';
 import Navigation from './Navigation';
@@ -20,7 +19,15 @@ import OrderConfirm from './OrderConfirm';
 import SellerMenuList from './SellerMenuList';
 import SellerMenuAddItem from './SellerMenuAddItem';
 import SellerMenuEditItem from './SellerMenuEditItem';
+import SellerMenuOrderList from './SellerMenuOrderList';
 import SellerOrderDashboard from './SellerOrderDashboard';
+import useStickyState from './useStickyState';
+
+// Stripe payment system
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+
+const stripePromise = loadStripe('pk_test_51GxIzcKCiGdjBgOYHqjQI2yN2oMA4VuPqvavGh8XsISbxK0koKUSGl5c1k9fnyVmzpetNP5pmMxFw3BmY8Pt2ovs004aIpuq1G');
 
 export default function App() {
   
@@ -30,10 +37,27 @@ export default function App() {
   //  const [email, setEmail] = useState("");
   //  const [password, setPassword] = useState("");
   const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('token')) || "");
-  
+  const [cartItems, setCartItems] = useStickyState([], 'cart');
+
+  const addCartItem = (item) => {
+    setCartItems([...cartItems, {
+      ...item,
+      order_quantity: 1
+    }]);
+  };
+
+  const removeCartItem = (index) => {
+    let itemsInCart = [...cartItems];
+
+    itemsInCart.splice(index, 1)
+    setCartItems([...itemsInCart]);
+  };
+
+    
   const logout = () => {
     if (localStorage.getItem('token')) {
       localStorage.removeItem('token')
+      localStorage.removeItem('cart');
     }
     setUserData = "";
   }
@@ -52,7 +76,7 @@ export default function App() {
     <Router>
       <div>
         <div className="App">
-        <Navigation userData={userData} logout={e => logout()}/>
+        <Navigation userData={userData} logout={e => logout()} cartItems={cartItems}/>
         </div>
         {/* A <Switch> looks through its children <Route>s and
         renders the first one that matches the current URL. */}
@@ -78,31 +102,47 @@ export default function App() {
             <About />
           </Route>
           <Route path="/cart">
-            <BuyerCart />
+            <BuyerCart 
+              removeCartItem={removeCartItem} 
+              cartItems={cartItems}
+              setCartItems={setCartItems}
+            />
           </Route>
           <Route path="/order_payment">
-            <OrderPayment />
+            <Elements stripe={stripePromise}>
+              <OrderPayment 
+                userData={userData} 
+                setCartItems={setCartItems} 
+                cartItems={cartItems}
+              />
+            </Elements>
           </Route>
           <Route path="/order_confirm">
             <OrderConfirm />
           </Route>
           <Route path="/buyer_dashboard">
-            <BuyerDashboard />
+            <BuyerDashboard userData={userData}/>
           </Route>
           <Route path="/seller_dashboard">
-            <SellerOrderDashboard />
+            <SellerOrderDashboard userData={userData}/>
           </Route>
           <Route path="/seller_menu/add_item">
-            <SellerMenuAddItem />
+            <SellerMenuAddItem userData={userData}/>
           </Route>
           <Route path="/seller_menu/edit_item">
             <SellerMenuEditItem />
+          </Route>
+          <Route path="/seller_menu/order">
+            <SellerMenuOrderList 
+              addCartItem={addCartItem}
+              userData={userData}
+            />
           </Route>
           <Route path="/seller_menu">
             <SellerMenuList userData={userData} />
           </Route>
           <Route path="/">
-            <Homepage />
+            <Homepage userData={userData}/>
           </Route>
 
         </Switch>

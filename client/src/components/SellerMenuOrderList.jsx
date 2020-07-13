@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import SellerMenuListItem from './SellerMenuListItem';
+import SellerMenuOrderListItem from './SellerMenuOrderListItem';
 import axios from 'axios';
 
-export default function SellerMenuList(props) {
+export default function SellerMenuOrderList(props) {
 
+  const { addCartItem } = props;
   const [menuData, setMenuData] = useState();
 
-  const { 
+  console.log(props)
+
+  const {
     id,
     first_name,
     last_name
@@ -17,6 +20,7 @@ export default function SellerMenuList(props) {
   const getMenuItems = (user_id) => {
     axios.get(`/api/menu_items/users/${user_id}`)
     .then(res => {
+      console.log("axios get", res.data)
       setMenuData(res.data)
     })
     .catch((err) => {
@@ -25,40 +29,26 @@ export default function SellerMenuList(props) {
     
   }
 
-  const delMenuItem = (item_id) => {
-    const newMenuData = menuData.filter((item) => {
-     return item.id !== item_id;
-    });
-    
-    axios.delete(`api/menu_items/${item_id}`)
-    .then(() => {
-      setMenuData(() => {
-        return newMenuData
-      })
-    })
-    .catch((err) => {
-      console.log(err)
-    });
-  }
-
   useEffect(() => {
     getMenuItems(id);
   }, []);
 
-  const sellerMenuItems = menuData
+  const SellerMenuOrderListItems = menuData
     ? menuData.map((menuItem, index) => {
+      console.log("CARTITEM:", menuItem)
       return(
-        <SellerMenuListItem
+        <SellerMenuOrderListItem
           key={index}
+          id={menuItem.id}
           seller_fn={first_name}
           seller_ln={last_name}
+          image={menuItem.image}
           description={menuItem.description}
           item_name={menuItem.name}
           is_active={menuItem.is_active}
-          image={menuItem.image}
-          quantity={menuItem.quantity}
           price={menuItem.price_cents}
-          onDelete={() => delMenuItem(menuItem.id)}
+          quantity={menuItem.quantity}
+          addCartItem={addCartItem}
         />
       );
     })
@@ -66,13 +56,10 @@ export default function SellerMenuList(props) {
 
   return (
     <>
-      <div className='seller-menu'>
+      <div className='seller-menu order'>
         <h2>{first_name} {last_name}'s Menu Items</h2>
       </div>
-      <Button href="/seller_menu/add_item" variant="dark" type="submit">
-        Add Item
-      </Button>
-      <div className="seller-menu list">
+      <div className="seller-menu order list">
         <Table hover>
           <thead>
             <tr>
@@ -82,9 +69,14 @@ export default function SellerMenuList(props) {
               <th>Price</th>
             </tr>
           </thead>
-          <tbody>{sellerMenuItems}</tbody>
+          <tbody>{SellerMenuOrderListItems}
+            </tbody>
         </Table>
       </div>
     </>
   );
 }
+
+
+
+

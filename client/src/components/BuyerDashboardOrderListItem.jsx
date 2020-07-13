@@ -1,16 +1,29 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
+import OHFrag from './OHFrag'
 
-export default function BuyerDashboardOrderListItem() {
+export default function BuyerDashboardOrderListItem(props) {
 
+    const { menuItems, order_id, order_total } = props;
+
+    console.log("menuitemsupcoming", menuItems)
+    const orderfragment = menuItems
+    ? menuItems.map((menuItem, index) => {
+      return(
+        <OHFrag
+          key={index}
+          image={menuItem.image}
+          item_name={menuItem.name}
+          item_quantity={menuItem.order_quantity}
+        />
+      );
+    })
+    : "No orders!";
   return (
       <tr>
-        <td>Order Quantity</td>
-        <td>Item Name</td>
-        <td >Order Id</td>
-        <td>Seller Name</td>
-        <td>Delivery Address</td>
-        <td><Button variant="danger" href="/">Cancel Order</Button> </td>
+        <td >{order_id}</td>
+        <td>{orderfragment}</td>
+        <td>{order_total}</td>
       </tr>
   );
 }

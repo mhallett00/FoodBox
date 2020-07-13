@@ -1,31 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import useStickyState from './useStickyState';
 
 
 export default function BuyerCartListItem(props) {
-  const { name, image, user_id, seller_name, quantity, description, price_cents } = props;
-  const [itemCount, setItemCount] = useState(1);
+  const {item_name, seller_fn, seller_ln, image, id, description, price, removeCartItem} = props;
 
   return (
     
     <tr>
-      <td><img src=""/>{image}</td>
+      <td><img src={image} width="120vw" heigh="90vh"/></td>
       <td>
-        <h3>{seller_name}'s {name}</h3>
+        <h3>{seller_fn} {seller_ln}'s {item_name}</h3>
         <h5>Single order - 6 pieces</h5>
         <ButtonGroup aria-label="Basic example">
-          <Button variant="light" onClick={() => setItemCount(itemCount - 1)}>-</Button>
-          <Button variant="light">{itemCount}</Button>
-          <Button variant="light" onClick={() => setItemCount(itemCount + 1)}>+</Button>
+          <Button variant="light" 
+            disabled={props.decOrderQuantity === 0} 
+            onClick={props.decOrderQuantity}
+            // onClick={subtractOne}
+          >-</Button>
+          <Button variant="light">{props.order_quantity}</Button>
+          <Button variant="light"
+            onClick={props.incOrderQuantity}
+            // onClick={addOne}
+          >+</Button>
         </ButtonGroup>
         <br/>
-        <Button variant="dark" type="submit">
+        <Button onClick={removeCartItem} variant="dark" type="submit">
           Remove
         </Button>
       </td>
       <td colSpan="2">{description}</td>
-      <td>${itemCount * price_cents}</td>
+      <td>
+        ${(props.order_quantity * price)/100}
+        </td>
     </tr>
     
   );
