@@ -36,7 +36,9 @@ export default function CreateCart(props) {
   }
 
   useEffect(() => {
-    if (userData.address) {
+    if (!userData) {
+      history.push('/login')
+    } else if (userData.address) {
       history.push('/search_cook')
     }
   }, [])
