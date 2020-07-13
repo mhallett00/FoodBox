@@ -14,7 +14,7 @@ export default function OrderPaymentListItem(props) {
         <h6>{quantity}</h6>
       </td>
       <td colSpan="2">{description}</td>
-      <td>${price/100}</td>
+      <td>${price * quantity/100}</td>
     </tr>
   );
 }
