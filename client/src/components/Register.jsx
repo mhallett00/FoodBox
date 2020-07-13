@@ -74,13 +74,13 @@ export default function Register(props) {
           <Form.Control type="password" placeholder="Password" value={state.password} onChange={handleChange}/>
         </Form.Group>
         {/* radio buttons  */}
-        <form action="/register method=POST">
+        <form className="homecook-radio" action="/register method=POST">
           <div>
             <p>Are you interested in joining to become a home cook?</p>
             <input type='radio' id='isHomeCook' value="true" checked={state.isHomeCook == 'true'} onChange={handleChange}/>
-            <label>Yes, count me in!</label><br/>
+            <label className="homecook-radio yes">Yes, count me in!</label><br/>
             <input type='radio' id='isHomeCook' value="false" checked={state.isHomeCook == 'false'} onChange={handleChange}/>
-            <label>No, just feed me!</label><br/>  
+            <label className="homecook-radio no">No, just feed me!</label><br/>  
           </div>
   
         </form>
