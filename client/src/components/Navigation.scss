@@ -1,6 +1,18 @@
+.navbar {
+  height: 2rem;
+  margin-bottom: 0rem;
+  
+  .header-logo {
+    font-size: 2rem;
+    padding-top: 1rem;
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+  }
 
-
-.header-logo {
-  font-size: 2rem;
-  padding-top: 1rem;
+  .nav-link {
+    font-size: 1.2rem;
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    color: black;
+  }
 }
