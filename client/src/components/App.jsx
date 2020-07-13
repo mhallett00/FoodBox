@@ -10,6 +10,7 @@ import Homepage from './Homepage';
 import Navigation from './Navigation';
 import About from './About';
 import SearchCook from './SearchCook';
+import SearchCook2 from './SearchCook2';
 import Register from './Register';
 import Login from './Login';
 import BuyerCart from './BuyerCart';
@@ -22,6 +23,7 @@ import SellerMenuEditItem from './SellerMenuEditItem';
 import SellerMenuOrderList from './SellerMenuOrderList';
 import SellerOrderDashboard from './SellerOrderDashboard';
 import useStickyState from './useStickyState';
+import CreateCart from './CreateCart';
 
 // Stripe payment system
 import {Elements} from '@stripe/react-stripe-js';
@@ -38,6 +40,7 @@ export default function App() {
   //  const [password, setPassword] = useState("");
   const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('token')) || "");
   const [cartItems, setCartItems] = useStickyState([], 'cart');
+  const [selectedCook, setSelectedCook ] = useState();
 
   const addCartItem = (item) => {
     setCartItems([...cartItems, {
@@ -95,8 +98,15 @@ export default function App() {
               setUserData={setUserData}
             />
           </Route>
+          <Route path="/create_cart">
+            <CreateCart 
+              userData={userData} 
+              setUserData={setUserData}
+            />
+          </Route>
           <Route path="/search_cook">
-            <SearchCook />
+            {/* <SearchCook /> */}
+            <SearchCook2 userData={userData} setSelectedCook={setSelectedCook}/>
           </Route>
           <Route path="/about">
             <About />
@@ -118,7 +128,7 @@ export default function App() {
             </Elements>
           </Route>
           <Route path="/order_confirm">
-            <OrderConfirm />
+            <OrderConfirm userData={userData} setUserData={setUserData}/>
           </Route>
           <Route path="/buyer_dashboard">
             <BuyerDashboard userData={userData}/>
@@ -136,6 +146,7 @@ export default function App() {
             <SellerMenuOrderList 
               addCartItem={addCartItem}
               userData={userData}
+              selectedCook={selectedCook}
             />
           </Route>
           <Route path="/seller_menu">
