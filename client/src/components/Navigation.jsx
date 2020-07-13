@@ -31,7 +31,7 @@ export default function Navigation(props) {
             </>
           )}
         <Nav className="header-basket"></Nav>
-          <Nav.Link href="/cart"><i className="fas fa-shopping-basket"><strong>(Cart Items)</strong></i></Nav.Link>
+          <Nav.Link href="/cart"><i className="fas fa-shopping-basket"></i></Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
