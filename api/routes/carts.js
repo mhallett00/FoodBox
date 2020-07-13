@@ -4,7 +4,6 @@ const knex = require('../knex/knex');
 
 /* POST Create new shopping cart */
 router.post('/:id', (req, res) => {
-  console.log(req.params)
   const { id } = req.params;
   const {
     street_address,
@@ -22,8 +21,9 @@ router.post('/:id', (req, res) => {
       postal_code,
       country
     })
-    .then(() => {
-      res.json("Cart created, go shopping!")
+    .returning('id')
+    .then((cart_id) => {
+      res.json(cart_id[0])
     })
     .catch((err) => {
       console.log(err);
@@ -32,7 +32,6 @@ router.post('/:id', (req, res) => {
 
 /* GET shopping cart info details*/
 router.get('/:id', (req, res, next) => {
-  console.log(req.params);
   const { id } = req.params;
   knex('carts')
   .first()
@@ -45,17 +44,21 @@ router.get('/:id', (req, res, next) => {
     });
 });
 
-/* POST add item to cart */
+/* POST add items to cart */
 router.post('/:id/items', (req, res) => {
-  knex('cart_items')
-    .insert({
+
+  const cartItemEntries = req.body.map((cartItem) => {
+    return({
       cart_id: req.params.id,
-      menu_item_id: req.body.id
+      menu_item_id: cartItem.id,
+      order_quantity: cartItem.order_quantity
     })
+  })
+  knex('cart_items')
+    .insert(cartItemEntries)
     .returning('*')
-    .then((cart_item) => {
-      console.log("item added");
-        res.json(cart_item[0]);
+    .then(() => {
+        res.json(req.params.id);
     })
     .catch((err) =>{
       console.log(err);

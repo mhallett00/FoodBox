@@ -15,7 +15,7 @@ export default function Navigation(props) {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="/search_cook">Order</Nav.Link>
+          <Nav.Link href="/create_cart">Order</Nav.Link>
           {userData.is_seller && (
             <>
               <Nav.Link href="/seller_menu">Your Menu</Nav.Link>

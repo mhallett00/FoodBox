@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 
-export default function OrderConfirm() {
+export default function OrderConfirm(props) {
+
+  const { userData, setUserData } = props;
+  
+  let token = JSON.parse(localStorage.getItem('token'))
+
+  const rmvDeliveryDetails = (token) => {
+    let tokenWithoutAddress = {
+      ...token
+    }
+
+    delete tokenWithoutAddress.address;
+
+    setUserData(tokenWithoutAddress);
+    localStorage.setItem('token', JSON.stringify(tokenWithoutAddress));
+  }
+
+  useEffect(() => {
+
+  
+    rmvDeliveryDetails(token)
+  }, [])
+
   return (
     <div className="order-confirm">
       <div className="order-confirm-description group">

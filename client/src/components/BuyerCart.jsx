@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
@@ -8,15 +8,6 @@ import { priceSubtotal } from '../helpers/price_calcs'
 export default function BuyerCart(props) {
   
   const { setCartItems, cartItems, removeCartItem } = props;
-
-  // const updateQty = (id, newQty) => {
-  //   const newItems = props.cartItems.map(item => {
-  //     if (item.id === id) {
-  //       return {...item, order_quantity: newQty}
-  //     }
-  //     return item;
-  //   })
-  // }
 
   const incOrderQuantity = (index) => {
 
@@ -35,11 +26,11 @@ export default function BuyerCart(props) {
       setCartItems(newCartItems)
     }
     if (newCartItems[index].order_quantity <= 0) {
-      removeCartItem();
+      removeCartItem(index);
     }
   };
-
-  const BuyerListItem = props.cartItems ? props.cartItems.map((ListItem, index) => {
+  
+  const BuyerListItem = cartItems ? cartItems.map((ListItem, index) => {
     return (
       <BuyerCartListItem 
         key={index}
@@ -58,9 +49,7 @@ export default function BuyerCart(props) {
         // updateQty={updateQty}
       />
     )
-  })
-  :
-  "no cart items!"
+  }) : "No items!"
 
   // subtotal price calculator
 

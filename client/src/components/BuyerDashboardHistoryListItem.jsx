@@ -6,7 +6,6 @@ export default function BuyerDashboardHistoryListItem(props) {
 
   const { menuItems, order_id, order_total } = props;
 
-  console.log("menuitemshistory", menuItems)
   const orderfragment = menuItems
   ? menuItems.map((menuItem, index) => {
     return(

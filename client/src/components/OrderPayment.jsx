@@ -79,16 +79,28 @@ export default function OrderPayment(props) {
     })
     .then((res) =>{
       if (res.status === 200) {
-        // axios.post('/api/cart', {
-        //   buyer_id: userData.id,
-        //   cart_id: userData.cart_id
-        // })
-        localStorage.removeItem('cart')
-        setCartItems([])
-        history.push('/order_confirm')
-        
-      }
-      
+        axios.post(`/api/carts/${userData.id}`, {
+          street_address: userData.address.street_address,
+          apartment:userData.address.apartment,
+          city: userData.address.city,
+          postal_code: userData.address.postal_code,
+          country: userData.address.country,
+        })
+        .then((res) =>{
+          axios.post(`api/carts/${res.data}/items`, cartItems)
+          .then(() => {
+            axios.post('/api/orders', {
+              cart_id: res.data,
+              buyer_id: userData.id
+            })
+            .then(() =>{
+                localStorage.removeItem('cart')
+                setCartItems([])
+                history.push('/order_confirm')
+            })
+          })
+        })  
+      }  
     })
     .catch(err=> console.log(err));
 
