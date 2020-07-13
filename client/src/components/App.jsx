@@ -27,7 +27,7 @@ import useStickyState from './useStickyState';
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 
-const stripePromise = loadStripe('pk_test_51GxIzcKCiGdjBgOYHqjQI2yN2oMA4VuPqvavGh8XsISbxK0koKUSGl5c1k9fnyVmzpetNP5pmMxFw3BmY8Pt2ovs004aIpuq1G');
+const stripePromise = loadStripe('pk_test_51GxK2EFjdfjgcidOJRFut1KmR2wihbdrukB6yshUqRlP1QtTna5ZRjYTGcgFgg1wwvVf5c4vNp3mw8FCRVq3dUnW0034b3GyjS');
 
 export default function App() {
   

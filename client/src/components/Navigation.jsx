@@ -38,7 +38,11 @@ export default function Navigation(props) {
             </>
           )}
         <Nav className="header-basket"></Nav>
+<<<<<<< HEAD
           <Nav.Link href="/cart"><i className="fas fa-shopping-basket"><strong>(Cart Items ({cartItems.length}))</strong></i></Nav.Link>
+=======
+          <Nav.Link href="/cart"><i className="fas fa-shopping-basket"></i></Nav.Link>
+>>>>>>> df7f29ca6113d72ded37cf307f74e52428c1199d
         </Nav>
       </Navbar.Collapse>
     </Navbar>
