@@ -65,13 +65,12 @@ export default function BuyerCart(props) {
   // }
 
   return (
-    <>
+    <div>
       <div className='buyer-cart'>
         <h2>My Cart</h2>
+        <p>You currently have {BuyerListItem.length} {BuyerListItem.length > 1 ? 'items' : 'item'} in your cart</p>
+        <hr/>
       </div>
-      <div> 
-        <h3>Items in Cart</h3>
-      </div> 
       <div className="buyer-cart list">
         <Table hover>
           <thead>
@@ -90,21 +89,23 @@ export default function BuyerCart(props) {
         <Table borderless>
           <tbody>
             <tr>
-              <td>Subtotal</td>
+              <td>
+                Subtotal:
+                </td>
               <td></td>
               <td colSpan="2"></td>
-              <td>${priceSubtotal(cartItems)/100}</td>
+              <td id="price-subtotal">${priceSubtotal(cartItems)/100}</td>
             </tr>
           </tbody>
         </Table>
           <div className="buyer-cart checkout">
             <Button href="/order_payment" variant="dark" type="submit">
-              Checkout
+              Proceed to Checkout
             </Button>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
