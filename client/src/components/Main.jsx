@@ -26,7 +26,7 @@ export default function Main(props) {
         {userData &&
         <Fragment>
           <div className="main-login button">
-            <Button variant="dark" href="/search_cook">Search Cooks</Button>{' '}
+            <Button variant="dark" href="/create_cart">Search Cooks</Button>{' '}
           </div>
           <div className="main-register link">
             <p>Ready to checkout? Please <a href="/cart">check your cart</a> to complete your order.</p>
