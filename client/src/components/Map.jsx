@@ -7,9 +7,9 @@ const Map = (props) => {
   const [selectedCook, setSelectedCook] = useState(null);
 
   useEffect(() => {
-    props.sellerPostCodes.forEach((postcode) => {
+    props.sellers.forEach((seller) => {
       Geocode.setApiKey("AIzaSyBs_0ctuC56zLKgVqXHXsnzoX_ImnBeaMM");
-      var address = postcode;
+      var address = seller.seller_postcode;
       Geocode.fromAddress(
         address,
         "AIzaSyBs_0ctuC56zLKgVqXHXsnzoX_ImnBeaMM"
@@ -20,7 +20,7 @@ const Map = (props) => {
         ]);
       });
     });
-  }, [props.sellerPostCodes]);
+  }, [props.sellers]);
   return (
     <GoogleMap defaultZoom={11} defaultCenter={{ lat: 45.5017, lng: -73.5673 }}>
       {coordinates.map((coordinate) => (

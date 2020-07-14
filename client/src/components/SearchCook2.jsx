@@ -48,10 +48,10 @@ export default function SearchCook2(props) {
       })
     : "No cooks available!";
 
-  const sellerPostCodes = cooks
+  const sellers = cooks
     ? cooks.map((cook) => {
         if (cook.is_seller) {
-          return cook.seller_postcode;
+          return cook;
         }
       })
     : [];
@@ -60,7 +60,7 @@ export default function SearchCook2(props) {
     <>
       <div style={{ width: "50vw", height: "50vh" }}>
         <Map
-          sellerPostCodes={sellerPostCodes}
+          sellers={sellers}
           googleMapURL={`https://maps.googleapis.com/maps/api/js?key=AIzaSyBs_0ctuC56zLKgVqXHXsnzoX_ImnBeaMM&v=3.exp&libraries=geometry,drawing,places`}
           loadingElement={<div style={{ height: "100%" }} />}
           containerElement={<div style={{ height: "100%" }} />}
