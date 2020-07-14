@@ -11,7 +11,7 @@ export default function OHFrag (props) {
         <h5>{item_name}</h5>
       </td>
       <td>
-        <h5>{item_quantity}</h5>
+        <h5>x {item_quantity}</h5>
       </td>
     </tr>
   );
