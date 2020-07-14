@@ -1,4 +1,5 @@
 import React from "react";
+import Image from 'react-bootstrap/Image';
 
 
 export default function OrderPaymentListItem(props) {
@@ -6,8 +7,10 @@ export default function OrderPaymentListItem(props) {
 
   return (
     <tr>
-      <td><img src={image} width="120vw" heigh="90vh"/></td>
-      <td>
+      <td className="order-payment item image">
+        <Image src={image} thumbnail/>
+      </td>
+      <td className="order-payment item name">
         <h3>{seller_fn} {seller_ln}'s {item_name}</h3>
       </td>
       <td>

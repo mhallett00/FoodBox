@@ -111,10 +111,8 @@ export default function OrderPayment(props) {
     <>
       <div className='order-payment'>
         <h2>My Cart</h2>
+        <p>You currently have {OrderListItem.length} {OrderListItem.length > 1 ? 'items' : 'item'} in your cart</p>
       </div>
-      <div> 
-        <h3>Items in Cart</h3>
-      </div> 
       <div className="order-payment list">
         <Table borderless hover>
           <thead>
@@ -131,27 +129,27 @@ export default function OrderPayment(props) {
           </tbody>
         </Table>
         <div className="order-payment subtotal">
-          <Table borderless>
+          <Table borderless hover>
             <tbody>
               <tr>
                 <td>Subtotal</td>
-                <td>${priceSubtotal(cartItems)/100} </td>
+                <td id="price-subtotal">${priceSubtotal(cartItems)/100} </td>
               </tr>
               <tr>
                 <td>GST</td>
-                <td>${GST(priceSubtotal(cartItems)/100).toFixed(2)}</td>
+                <td id="GST">${GST(priceSubtotal(cartItems)/100).toFixed(2)}</td>
               </tr>
               <tr>              
                 <td>QST</td>
-                <td>${QST(priceSubtotal(cartItems)/100).toFixed(2)}</td>
+                <td id="QST">${QST(priceSubtotal(cartItems)/100).toFixed(2)}</td>
               </tr>
               <tr> 
                 <td>Delivery</td>
-                <td>${deliveryFee().toFixed(2)}</td>
+                <td id="delivery-fee">${deliveryFee().toFixed(2)}</td>
               </tr>
               <tr> 
-                <td><h4>Total</h4></td>
-                <td><h4>${total_price}</h4></td>
+                <td>Total</td>
+                <td id="price-total">${total_price}</td>
               </tr>
             </tbody>
           </Table>
@@ -173,7 +171,7 @@ export default function OrderPayment(props) {
               }}
             />
             <button type="submit" disabled={!stripe}>
-              Pay
+              Place Your Order
             </button>
           </form>
         </div>
