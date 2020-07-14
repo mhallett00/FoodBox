@@ -60,12 +60,13 @@ export default function SellerMenuAddItem(props) {
   }
   
   return (
-    <>
+    <div>
       <div className="seller-name">
-        <h3>{userData.first_name} {userData.last_name}'s Menu</h3>
+        <h2>{userData.first_name} {userData.last_name}'s Menu</h2>
         <h5>Add Menu Items</h5>
+        <hr/>
       </div>
-      <Form>
+      <Form className="seller-name add-item">
         <Form.Group controlId="name">
           <Form.Label>Item Name</Form.Label>
           <Form.Control type="item-name" placeholder="Item Name" value={state.name} onChange={handleChange} />
@@ -92,11 +93,11 @@ export default function SellerMenuAddItem(props) {
           as="textarea"
           rows="5"
         />
-        <Button variant="dark" type="submit" onClick={handleSubmit}>
-          Add Item 
-        </Button>
         </Form.Group>
       </Form>
-    </>
+      <Button variant="dark" type="submit" onClick={handleSubmit}>
+        + Add Item 
+      </Button>
+    </div>
   );
 }

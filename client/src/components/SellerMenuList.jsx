@@ -69,14 +69,13 @@ export default function SellerMenuList(props) {
       <div className='seller-menu'>
         <h2>{first_name} {last_name}'s Menu Items</h2>
       </div>
-      <div className="seller-menu add button">
-        
-        <span>
+      <div className="seller-menu add button"> 
+        <p>
           You currently have {sellerMenuItems.length} active {sellerMenuItems.length > 1 ? 'items' : 'item' } on your menu. Would you like to add more?
-          <Button href="/seller_menu/add_item" variant="dark" type="submit">
-            Add Item
-          </Button>
-        </span>
+        </p>
+        <Button href="/seller_menu/add_item" variant="dark" type="submit">
+           + Add Item
+        </Button>
       <hr/>
       </div>
       <div className="seller-menu list">
