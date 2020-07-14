@@ -7,13 +7,18 @@ import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
 export default function SearchCook2(props) {
-  const { userData, setSelectedCook } = props;
+  const { userData, setSelectedCook, selectedCook, cartItems } = props;
 
   const [cooks, setCooks] = useState();
 
   const history = useHistory();
 
+  
+
   useEffect(() => {
+    if (cartItems.length) {
+      history.push("/seller_menu/order");
+    }
     axios
       .get("/api/users/")
       .then((res) => {
@@ -35,12 +40,12 @@ export default function SearchCook2(props) {
               cook_email={cook.email}
               uid={cook.id}
               onSelect={() => {
+
                 setSelectedCook({
                   id: cook.id,
                   cook_fn: cook.first_name,
                   cook_ln: cook.last_name,
                 });
-                console.log(cook);
                 history.push("/seller_menu/order");
               }}
             />
