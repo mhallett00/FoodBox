@@ -41,7 +41,6 @@ app.post('/api/payment', async (req, res) => {
     payment_method: id,
     confirm: true
   });
-  console.log(paymentIntent),
   res
   .status(200)
   .json({
