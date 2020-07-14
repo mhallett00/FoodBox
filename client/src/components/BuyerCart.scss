@@ -1,0 +1,28 @@
+.buyer-cart {
+  padding-bottom: 0rem;
+  padding-left: 10rem;
+  padding-right: 10rem;
+
+  h2 {
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    padding-top: 5rem;
+    font-size: 3rem;;
+  }
+
+  thead {
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+}
+
+.seller-menu.add.button {
+  padding-top: 0rem;
+
+  a.btn.btn-dark {
+    margin-left: 1rem;
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+  }
+}

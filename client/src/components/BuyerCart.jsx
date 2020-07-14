@@ -65,13 +65,12 @@ export default function BuyerCart(props) {
   // }
 
   return (
-    <>
+    <div>
       <div className='buyer-cart'>
         <h2>My Cart</h2>
+        <p>You currently have {BuyerListItem.length} items in your cart</p>
+        <hr/>
       </div>
-      <div> 
-        <h3>Items in Cart</h3>
-      </div> 
       <div className="buyer-cart list">
         <Table hover>
           <thead>
@@ -104,7 +103,7 @@ export default function BuyerCart(props) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
