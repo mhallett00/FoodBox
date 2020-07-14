@@ -76,7 +76,6 @@ export default function SearchCook2(props) {
             <tr>
               <th>Location</th>
               <th colSpan="2">Name</th>
-              {/* <th>Menu Items</th> */}
             </tr>
           </thead>
           <tbody>{cooksInArea}</tbody>
