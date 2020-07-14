@@ -38,6 +38,7 @@ router.get('/:id', (req, res) => {
     })
     .catch((err) => {
       console.log(err)
+      res.status(500).end();
     });
 });
 
@@ -51,6 +52,7 @@ router.get('/users/:user_id', (req, res) => {
     })
     .catch((err) => {
       console.log(err)
+      res.status(500).end();
     });
 });
 
@@ -65,6 +67,7 @@ router.post('/', (req, res) => {
     })
     .catch((err) => {
       console.log(err)
+      res.status(500).end();
     });
 });
 
@@ -88,6 +91,7 @@ router.post('/:id', (req, res) => {
     })
     .catch((err) =>{
       console.log(err);
+      res.status(500).end();
     });
   
 });
@@ -103,6 +107,7 @@ router.delete('/:id', (req, res) => {
     })
     .catch((err) => {
       console.log(err)
+      res.status(500).end();
     });
 });
 

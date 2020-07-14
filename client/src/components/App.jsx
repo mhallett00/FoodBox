@@ -40,7 +40,9 @@ export default function App() {
   //  const [password, setPassword] = useState("");
   const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('token')) || "");
   const [cartItems, setCartItems] = useStickyState([], 'cart');
-  const [selectedCook, setSelectedCook ] = useState();
+  const [selectedCook, setSelectedCook ] = useState(
+    userData.seller && JSON.parse(localStorage.getItem('token')).seller || ""
+  );
 
   const addCartItem = (item) => {
     setCartItems([...cartItems, {
@@ -56,7 +58,6 @@ export default function App() {
     setCartItems([...itemsInCart]);
   };
 
-    
   const logout = () => {
     if (localStorage.getItem('token')) {
       localStorage.removeItem('token')
@@ -64,16 +65,6 @@ export default function App() {
     }
     setUserData = "";
   }
-
-  axios({
-    method: "GET",
-    url: "/api",
-    headers: {
-      "Content-Type": "application/json"
-    }
-  }).then(res => {
-    console.log(res.data.message);
-  });
 
   return (
     <Router>
@@ -106,7 +97,7 @@ export default function App() {
           </Route>
           <Route path="/search_cook">
             {/* <SearchCook /> */}
-            <SearchCook2 userData={userData} setSelectedCook={setSelectedCook}/>
+            <SearchCook2 userData={userData} cartItems={cartItems} selectedCook={selectedCook} setSelectedCook={setSelectedCook}/>
           </Route>
           <Route path="/about">
             <About />

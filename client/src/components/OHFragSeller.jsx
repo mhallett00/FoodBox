@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export default function OHFrag (props) {
+export default function OHFragSeller (props) {
 
   const { item_name, image, item_quantity} = props;
   return (
@@ -13,6 +13,7 @@ export default function OHFrag (props) {
       <td>
         <h5>x {item_quantity}</h5>
       </td>
+
     </tr>
   );
 } 

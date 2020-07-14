@@ -12,6 +12,7 @@ export default function SellerMenuOrderList(props) {
 
   const history = useHistory();
 
+  let token = JSON.parse(localStorage.getItem('token'))
 
   console.log(props)
 
@@ -24,7 +25,6 @@ export default function SellerMenuOrderList(props) {
   const getMenuItems = (seller_id) => {
     axios.get(`/api/menu_items/users/${seller_id}`)
     .then(res => {
-      console.log("axios get", res.data)
       setMenuData(res.data)
     })
     .catch((err) => {
@@ -33,9 +33,22 @@ export default function SellerMenuOrderList(props) {
     
   }
 
+  const addSelectedCook = (state, token) => {
+    let tokenWithCook = {
+      ...token,
+      seller : {
+        id: state.id,
+        cook_fn: state.cook_fn,
+        cook_ln: state.cook_ln,
+      }
+    }
+    localStorage.setItem('token', JSON.stringify(tokenWithCook));
+
+  }
+
   useEffect(() => {
     if (selectedCook) {
-      console.log("SELECTEDCOOK", selectedCook)
+      addSelectedCook(selectedCook, token)
       getMenuItems(selectedCook.id);
     } else {
       history.push('/search_cook')
@@ -44,7 +57,6 @@ export default function SellerMenuOrderList(props) {
 
   const SellerMenuOrderListItems = menuData
     ? menuData.map((menuItem, index) => {
-      console.log("CARTITEM:", menuItem)
       return(
         <SellerMenuOrderListItem
           key={index}

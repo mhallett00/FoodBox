@@ -1,34 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 // import Form from 'react-bootstrap/Form';
-import OHFrag from './OHFrag'
+import OHFragSeller from './OHFragSeller';
+import Button from 'react-bootstrap/Button';
 
 export default function SellerOrderDashboardListItem(props) {
-  
-  const { menuItems } = props;
-
-  const [state, setState] = useState({
-    order_fulfilled: true 
-  })
  
-  const handleChange = (e) => {
-    const {id, value} = e.target;
-    setState(prevState => {
-      return {
-        ...prevState,
-        [id]: value
-      }
-    }) 
-  }
-
+  const { menuItems, order_quantity, onConfirm } = props;
+ 
   const orderfragment = menuItems
   ? menuItems.map((menuItem, index) => {
     return(
-      menuItem.user_id === 
-      <OHFrag
+      <OHFragSeller
         key={index}
         image={menuItem.image}
         item_name={menuItem.name}
-        item_quantity={menuItem.order_quantity}
+        item_quantity={order_quantity.cartiteminfo[index].order_quantity}
+        // order_quantity={props.order_quanitity[index].order_quantity}
       />
     );
   })
@@ -36,14 +23,16 @@ export default function SellerOrderDashboardListItem(props) {
 
   return (
       <tr>
-        <td>Order Id</td>
-        <td>{OHFrag}</td>
-        <td>Order Quantity</td>
-        <td>Customer Name</td>
-        <td>Delivery Address</td>
+        <td>{props.order_id}</td>
+        <td>{orderfragment}</td>
+        {/* <td>Order Quantity</td> */}
+        <td>{props.buyer_fn} {props.buyer_ln}</td>
+        <td>$ {(props.order_total / 100).toFixed(2)}</td>
         <td>
           {/* checkbox currently not working yet*/}
-          <input type='checkbox' id='order_fullfilled' value="true" checked={state.order_fulfilled === "true"} onChange={handleChange}/>
+          <Button variant="dark" type="submit" onClick={onConfirm}>
+              Confirm
+          </Button>
         </td>
       </tr>
   );
