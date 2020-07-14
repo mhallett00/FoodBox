@@ -1,5 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
+import Image from 'react-bootstrap/Image';
+import Figure from 'react-bootstrap/Figure'
 // import ButtonGroup from 'react-bootstrap/ButtonGroup';
 // import { propTypes } from 'react-bootstrap/esm/Image';
 
@@ -17,10 +19,9 @@ export default function SellerMenuListItem(props) {
   
   return (
     <tr>
-      <td><img src={image} width="120vw" heigh="90vh"/></td>
-      <td>
+      <td className="seller-menu item image"><Image src={image} thumbnail="true" /></td>
+      <td className="seller-menu item name">
         <h3>{item_name}</h3>
-        <h5></h5>
         {/* <form action="/register method=POST" className="menu-availability">
         <h5>Available to Order?</h5>
         <div className="custom-control custom-radio">

@@ -55,19 +55,19 @@ export default function Register(props) {
   return (
     <div className='register-form-container'>
       <Form className="register-form">
-        <h2 className="register-greeting">Create an account</h2>
-        <p>Please fill in the required information to continue</p>
+        <h2 className="register-greeting">Create An Account</h2>
+        <p>Please fill in the required information to continue.</p>
         <Form.Group controlId="first_name">
           <Form.Label>First name</Form.Label>
-          <Form.Control type="first_name" placeholder="First name" value={state.first_name} onChange={handleChange}/>
+          <Form.Control type="first_name" placeholder="First Name" value={state.first_name} onChange={handleChange}/>
         </Form.Group>
         <Form.Group controlId="last_name">
           <Form.Label>Last name</Form.Label>
-          <Form.Control type="last_name" placeholder=" Last name" value={state.last_name} onChange={handleChange}/>
+          <Form.Control type="last_name" placeholder="Last Name" value={state.last_name} onChange={handleChange}/>
         </Form.Group>
         <Form.Group controlId="email">
           <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" value={state.email} onChange={handleChange}/>
+          <Form.Control type="email" placeholder="Enter Email" value={state.email} onChange={handleChange}/>
         </Form.Group>
         <Form.Group controlId="password">
           <Form.Label>Password</Form.Label>
