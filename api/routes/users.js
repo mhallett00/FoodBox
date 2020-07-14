@@ -13,6 +13,7 @@ router.post('/', (req, res) => {
     })
     .catch((err) => {
       console.log(err)
+      res.status(500).end();
     })
 });
 
@@ -25,6 +26,7 @@ router.get('/', (req, res) => {
     })
     .catch((err) => {
       console.log(err)
+      res.status(500).end();
     })
 })
 
