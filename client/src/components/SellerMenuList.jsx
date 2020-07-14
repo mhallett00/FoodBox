@@ -69,9 +69,11 @@ export default function SellerMenuList(props) {
       <div className='seller-menu'>
         <h2>{first_name} {last_name}'s Menu Items</h2>
       </div>
-      <Button href="/seller_menu/add_item" variant="dark" type="submit">
-        Add Item
-      </Button>
+      <div className="seller-menu add button">
+        <Button href="/seller_menu/add_item" variant="dark" type="submit">
+          Add Item
+        </Button>
+      </div>
       <div className="seller-menu list">
         <Table hover>
           <thead>

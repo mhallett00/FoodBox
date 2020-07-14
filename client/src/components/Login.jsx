@@ -50,7 +50,7 @@ export default function Login(props) {
       <h2 className="login-greeting">Welcome Back!</h2>
       <p>Type in your email and password to continue</p>
       <Form.Group controlId="email">
-        <Form.Label>Email address</Form.Label>
+        <Form.Label>Email Address</Form.Label>
         <Form.Control type="email" placeholder="Enter email" value={state.email} onChange={handleChange}/>
         </Form.Group>
       <Form.Group controlId="password">
@@ -61,15 +61,9 @@ export default function Login(props) {
       <Button variant="dark" type="submit" onClick={handleSubmit}>
         Log In
       </Button>
-      
-      <h4 className="login-greeting register">New to Foodbox?</h4>
-      <p>Please register to continue</p>
-      <Button variant="dark" type="submit">
-        <Link to='/register'>
-          Register
-        </Link>
-      </Button>
-    </Form>
+        <h4 className="login-greeting register">New to Foodbox?</h4>
+        <p><Link to="/register">Please register to continue</Link></p>
+      </Form>
     </div>
   );
 }
