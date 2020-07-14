@@ -2,12 +2,16 @@ import React, { useState, useEffect } from "react";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import SellerMenuOrderListItem from './SellerMenuOrderListItem';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 export default function SellerMenuOrderList(props) {
 
-  const { addCartItem } = props;
+  const { addCartItem, selectedCook } = props;
   const [menuData, setMenuData] = useState();
+
+  const history = useHistory();
+
 
   console.log(props)
 
@@ -17,8 +21,8 @@ export default function SellerMenuOrderList(props) {
     last_name
   } = props.userData;
 
-  const getMenuItems = (user_id) => {
-    axios.get(`/api/menu_items/users/${user_id}`)
+  const getMenuItems = (seller_id) => {
+    axios.get(`/api/menu_items/users/${seller_id}`)
     .then(res => {
       console.log("axios get", res.data)
       setMenuData(res.data)
@@ -30,7 +34,12 @@ export default function SellerMenuOrderList(props) {
   }
 
   useEffect(() => {
-    getMenuItems(id);
+    if (selectedCook) {
+      console.log("SELECTEDCOOK", selectedCook)
+      getMenuItems(selectedCook.id);
+    } else {
+      history.push('/search_cook')
+    }
   }, []);
 
   const SellerMenuOrderListItems = menuData
@@ -40,8 +49,8 @@ export default function SellerMenuOrderList(props) {
         <SellerMenuOrderListItem
           key={index}
           id={menuItem.id}
-          seller_fn={first_name}
-          seller_ln={last_name}
+          seller_fn={selectedCook.cook_fn}
+          seller_ln={selectedCook.cook_ln}
           image={menuItem.image}
           description={menuItem.description}
           item_name={menuItem.name}
@@ -57,7 +66,10 @@ export default function SellerMenuOrderList(props) {
   return (
     <>
       <div className='seller-menu order'>
-        <h2>{first_name} {last_name}'s Menu Items</h2>
+        {selectedCook &&
+          <h2>
+            {selectedCook.cook_fn} {selectedCook.cook_ln}'s Menu Items
+          </h2>}
       </div>
       <div className="seller-menu order list">
         <Table hover>
@@ -72,6 +84,9 @@ export default function SellerMenuOrderList(props) {
           <tbody>{SellerMenuOrderListItems}
             </tbody>
         </Table>
+        <Button variant="dark" href='/cart' type="submit">
+            Go To Cart
+        </Button>
       </div>
     </>
   );

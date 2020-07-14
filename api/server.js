@@ -13,7 +13,7 @@ const app = express();
 const knex = require('./knex/knex.js');
 
 // STRIPE PAYMENT
-const stripe = require('stripe')('sk_test_51GxIzcKCiGdjBgOYA94niR4KNH77MR2E71AXqgcnxkPnozjjY8ggyX4jSu0hClkxjuaVOVpzT05KfuQQlZv5TWtO00z3Wni5tQ');
+const stripe = require('stripe')(process.env.SECRET_KEY);
 
 app.use(logger('dev'));
 app.use(express.json());

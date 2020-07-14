@@ -13,12 +13,11 @@ export default function BuyerCartListItem(props) {
       <td><img src={image} width="120vw" heigh="90vh"/></td>
       <td>
         <h3>{seller_fn} {seller_ln}'s {item_name}</h3>
-        <h5>Single order - 6 pieces</h5>
+        <h5>Quantity</h5>
         <ButtonGroup aria-label="Basic example">
           <Button variant="light" 
             disabled={props.decOrderQuantity === 0} 
             onClick={props.decOrderQuantity}
-            // onClick={subtractOne}
           >-</Button>
           <Button variant="light">{props.order_quantity}</Button>
           <Button variant="light"
