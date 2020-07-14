@@ -66,8 +66,6 @@ export default function OrderPayment(props) {
       }
     });
 
-    console.log(paymentMethod)
-
     if (error) {
       console.log('[error]', error);
     } else {
@@ -91,7 +89,9 @@ export default function OrderPayment(props) {
           .then(() => {
             axios.post('/api/orders', {
               cart_id: res.data,
-              buyer_id: userData.id
+              buyer_id: userData.id,
+              seller_id: userData.seller.id,
+              total: total_price * 100
             })
             .then(() =>{
                 localStorage.removeItem('cart')
