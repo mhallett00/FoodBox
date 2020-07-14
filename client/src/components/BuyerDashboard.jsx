@@ -10,9 +10,7 @@ export default function BuyerDashboard(props) {
   const [ orderHistory, setOrderHistory ] = useState();
 
   const { 
-    id,
-    first_name,
-    last_name
+    id
   } = props.userData;
 
   const getOrderHistory = (user_id) => {
@@ -33,14 +31,18 @@ export default function BuyerDashboard(props) {
   const completeOrders = orderHistory
     ? orderHistory.map((orderId, index) => {
       return(
-        orderId.completed ?
+        orderId.completed &&
           <BuyerDashboardHistoryListItem
             key={index}
             menuItems={orderId.menu_items}
             order_id={orderId.id}
             order_total={orderId.order_total}
+            seller_fn={orderId.userinfo[0].first_name}
+            seller_ln={orderId.userinfo[0].last_name}
+            order_id={orderId.id}
+            order_quantity={orderId}
+            order_total={orderId.total}
           />
-        : "no orders!"
       );
     })
     : "No orders!";
@@ -48,33 +50,37 @@ export default function BuyerDashboard(props) {
     const upcomingOrders = orderHistory
     ? orderHistory.map((orderId, index) => {
       return(
-        !orderId.completed ?
+        !orderId.completed &&
         <BuyerDashboardOrderListItem
-        key={index}
-        menuItems={orderId.menu_items}
-        order_id={orderId.id}
-        order_total={orderId.order_total}
+          key={index}
+          menuItems={orderId.menu_items}
+          order_id={orderId.id}
+          order_total={orderId.order_total}
+          seller_fn={orderId.userinfo[0].first_name}
+          seller_ln={orderId.userinfo[0].last_name}
+          order_id={orderId.id}
+          order_quantity={orderId}
+          order_total={orderId.total}
         />
-        : "no orders!"
       );
     })
     : "No menu!";  
 
-    console.log(orderHistory)
-
   return (
     <>
       <div className='buyer-dashboard'>
-        <h2>Welcome, {first_name}!</h2>
+        <h2>Your Orders</h2>
+        <h4>Upcoming Deliveries</h4>
       </div>
       <div className="buyer-dashboard list">
         <div className="buyer-dashboard upcoming_list">
           <Table striped borderless hover>
             <thead>
               <tr>
-                <th>Order id</th>
+                <th>Order Id</th>
                 <th>Items</th>
-                <th> Order Total</th>
+                <th>Seller Name</th>
+                <th>Order Total</th>
               </tr>
             </thead>
             <tbody>
@@ -91,7 +97,8 @@ export default function BuyerDashboard(props) {
               <tr>
                 <th>Order Id</th>
                 <th>Items</th>
-                <th>Date Delivered</th>
+                <th>Seller Name</th>
+                <th>Order Total</th>
               </tr>
             </thead>
             <tbody>
