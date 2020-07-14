@@ -1,67 +1,40 @@
-import React from "react";
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import React, { useEffect, useState } from "react";
+import Geocode from "react-geocode";
+import { GoogleMap, withGoogleMap, Marker } from "react-google-maps";
 
-export default function Map() {
+const Map = (props) => {
+  const [coordinates, setCoordinates] = useState([]);
+  const [selectedCook, setSelectedCook] = useState(null);
+
+  useEffect(() => {
+    props.sellerPostCodes.forEach((postcode) => {
+      Geocode.setApiKey("AIzaSyBs_0ctuC56zLKgVqXHXsnzoX_ImnBeaMM");
+      var address = postcode;
+      Geocode.fromAddress(
+        address,
+        "AIzaSyBs_0ctuC56zLKgVqXHXsnzoX_ImnBeaMM"
+      ).then((res) => {
+        setCoordinates((prevCoordinates) => [
+          ...prevCoordinates,
+          res.results[0].geometry.location,
+        ]);
+      });
+    });
+  }, [props.sellerPostCodes]);
   return (
-    <div>
-    </div>
-  )
-}
+    <GoogleMap defaultZoom={11} defaultCenter={{ lat: 45.5017, lng: -73.5673 }}>
+      {coordinates.map((coordinate) => (
+        <Marker
+          key={coordinate.lat}
+          position={{ lat: coordinate.lat, lng: coordinate.lng }}
+          onClick={() => {
+            setSelectedCook(coordinate);
+          }}
+        />
+      ))}
+    </GoogleMap>
+  );
+};
 
-// const containerStyle = {
-//   width: '80vw',
-//   height: '60vh'
-// };
-
-// const center = {
-//   lat: 45.501,
-//   lng: -73.567
-// };
-
-// const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-// function Map() {
-//   return (
-//     <LoadScript
-//       googleMapsApiKey={API_KEY}
-//     >
-//       <GoogleMap
-//         mapContainerStyle={containerStyle}
-//         center={center}
-//         zoom={14}
-//       >
-//         { /* Child components, such as markers, info windows, etc. */ }
-//         <></>
-//       </GoogleMap>
-//     </LoadScript>
-//   )
-// }
-
-// export default React.memo(Map)
-
-// function MapWindow() {
-//   return (
-//     <GoogleMap 
-//       defaultZoom={10} 
-//       defaultCenter={{lat: 45.501690, lng: -73.567253}}
-//     />
-//   );
-// }
-// // googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-// const WrappedMap = withScriptjs(withGoogleMap(MapWindow))
-
-// export default function Map() {
-//   return (
-//     <>
-//     <h1>Map</h1>
-//     <div style={{width: "40vw", height: "40vh"}}>
-//       <WrappedMap 
-//         googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`}
-//         loadingElement={<div style={{height: "100%"}}/>} 
-//         containerElement={<div style={{height: "100%"}}/>} 
-//         mapElement={<div style={{height: "100%"}}/>} 
-//       />
-//     </div>
-//     <h1>Here</h1>
-//     </>
-//   )
-// }
+const WrappedMap = withGoogleMap(Map);
+export default WrappedMap;
