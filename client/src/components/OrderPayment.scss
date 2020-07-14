@@ -17,7 +17,7 @@
   }
 }
 
-.buyer-cart.subtotal {
+.order-payment.subtotal {
   font-size: 1rem;
   width: 100%;
   padding-left: 0rem;
@@ -28,15 +28,25 @@
     font-size: 1rem;
     text-align: right;
   }
-}
 
-.buyer-cart.checkout {
-  padding-top: 0rem;
-  padding-left: 0rem;
+  #GST {
+    font-size: 1rem;
+    text-align: right;
+  }
+  
+  #QST {
+    font-size: 1rem;
+    text-align: right;
+  }
 
-  a.btn.btn-dark {
-    margin-left: 1rem;
-    font-family: "Playfair Display", serif;
-    font-weight: 700;
+  #delivery-fee {
+    font-size: 1rem;
+    text-align: right;
+  }
+
+  #price-total {
+    font-size: 1.5rem;
+    text-align: right;
   }
 }
+
