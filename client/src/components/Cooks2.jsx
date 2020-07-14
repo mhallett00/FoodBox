@@ -7,21 +7,14 @@ export default function Cook(props) {
   const { cook_fn, cook_ln, uid, onSelect} = props;
 
   return (
-    <>
-        <tr>
-          <td>2 kms away</td>
-          <td>{cook_fn} {cook_ln}</td>
-          {/* <td>
-            <ul>
-              <li></li>
-              <li></li>
-            </ul>
-          </td> */}
-          <Button variant="dark" type="submit" onClick={onSelect}>
-            Order
-          </Button>
-
-        </tr>
-          </>
+    <tr>
+      <td>2 kms away</td>
+      <td colSpan="2">{cook_fn} {cook_ln}</td>
+      <td>
+        <Button variant="dark" type="submit" onClick={onSelect}>
+          Order
+        </Button>
+      </td>
+    </tr>
   );
 }

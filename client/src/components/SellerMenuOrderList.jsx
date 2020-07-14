@@ -81,11 +81,12 @@ export default function SellerMenuOrderList(props) {
               <th>Price</th>
             </tr>
           </thead>
-          <tbody>{SellerMenuOrderListItems}
-            </tbody>
+          <tbody>
+            {SellerMenuOrderListItems}
+          </tbody>
         </Table>
         <Button variant="dark" href='/cart' type="submit">
-            Go To Cart
+            Go to Cart
         </Button>
       </div>
     </>
