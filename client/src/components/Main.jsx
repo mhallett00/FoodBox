@@ -6,8 +6,6 @@ export default function Main(props) {
 
   const { userData } = props;
 
-  console.log(userData)
-
   return (
     <div className="main">
       <div className="main-description group">
