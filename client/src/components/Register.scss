@@ -2,41 +2,59 @@
   display: grid;
   justify-items: center;
   background-image: url('https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80');
-
   padding-top: 10rem;
   padding-bottom: 10rem;
   padding-left: 1rem;
   padding-right: 1rem;
-
+  font-family: "Playfair Display", serif;
+  font-weight: 500;
 
   .register-form {
     width: 40%;
     padding: 2rem;
     background: white;
-  }
 
-  label .form-label {
-    font-size: 2rem;
-    color: #f9f9f9;
-  }
-
-  form.homecook-radio {
-    padding: 1rem 1rem;
-
-    label.homecook-radio.yes {
-      padding-left: 1rem;
+    h2 {
+      font-size: 2.3rem;
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
     }
 
-    label.homecook-radio.no {
-      padding-left: 1rem;
+    p {
+      padding-top: 1rem;
+    }
+    
+    label .form-label {
+      font-size: 2rem;
+      color: #f9f9f9;
+    }
+  
+    form.homecook-radio {
+      padding: 0rem 1rem 1rem;
+
+      input#isHomeCook {
+        padding-top: 1rem;
+      }
+  
+      label.homecook-radio.yes {
+        padding-left: 1rem;
+      }
+  
+      label.homecook-radio.no {
+        padding-left: 1rem;
+      }
+    }
+  
+    button.btn.btn-dark {
+      padding: 0.5rem 2rem;
+    }
+
+    p {
+
     }
 
   }
 
-
-  button.btn.btn-dark {
-    padding: 0.5rem 2rem;
-  }
 }
 
 
