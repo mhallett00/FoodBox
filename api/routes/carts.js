@@ -27,6 +27,7 @@ router.post('/:id', (req, res) => {
     })
     .catch((err) => {
       console.log(err);
+      res.status(500).end();
     });
 });
 
@@ -41,6 +42,7 @@ router.get('/:id', (req, res, next) => {
     })
     .catch((err) =>{
       console.log(err);
+      res.status(500).end();
     });
 });
 
@@ -62,13 +64,13 @@ router.post('/:id/items', (req, res) => {
     })
     .catch((err) =>{
       console.log(err);
+      res.status(500).end();
     });
 
 });
 
 /* GET shopping cart contents by cart id */
 router.get('/:id/items', (req, res) => {
-  console.log(req.params);
   const { id } = req.params;
   knex('cart_items')
     .select('cart_items.*', 'menu_items.name', 'menu_items.description', 'menu_items.image', 'menu_items.price_cents', 'menu_items.is_active') 
@@ -79,6 +81,7 @@ router.get('/:id/items', (req, res) => {
     })
     .catch((err) =>{
       console.log(err);
+      res.status(500).end();
     });
 });
 
@@ -94,6 +97,7 @@ router.delete('/:id/items/:item_id', (req, res) => {
     })
     .catch((err) =>{
       console.log(err);
+      res.status(500).end();
     });
 });
 
