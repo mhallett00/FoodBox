@@ -18,6 +18,7 @@ router.post('/', function(req, res) {
       })
       .catch((err) =>{
         console.log(err);
+        res.status(500).end();
       })
   } else {
     res.status(403).send("Error 403\nPlease enter an email! Please try again!");
