@@ -16,7 +16,9 @@ export default function SellerMenuListItem(props) {
   
   return (
     <tr>
-      <td className="seller-menu item image"><Image src={image}/></td>
+      <td className="seller-menu item image">
+        <Image src={image} thumbnail/>
+      </td>
       <td className="seller-menu item name">
         <h3>{item_name}</h3>
         {/* <form action="/register method=POST" className="menu-availability">

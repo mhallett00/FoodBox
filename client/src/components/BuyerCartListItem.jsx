@@ -1,6 +1,7 @@
 import React from "react";
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Image from 'react-bootstrap/Image';
 import useStickyState from './useStickyState';
 
 
@@ -10,8 +11,10 @@ export default function BuyerCartListItem(props) {
   return (
     
     <tr>
-      <td><img src={image} width="120vw" heigh="90vh"/></td>
-      <td>
+      <td className="buyer-cart item image">
+        <Image src={image} thumbnail/>
+      </td>
+      <td className="buyer-cart item name">
         <h3>{seller_fn} {seller_ln}'s {item_name}</h3>
         <h5>Quantity</h5>
         <ButtonGroup aria-label="Basic example">

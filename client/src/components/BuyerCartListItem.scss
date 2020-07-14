@@ -1,0 +1,33 @@
+.buyer-cart.list {
+  padding-top: 0rem;
+  padding-left: 10rem;
+  padding-right: 10rem;
+
+  td.buyer-cart.item.image{
+    width: 20vw;
+  
+  
+    img {
+      max-width: 100%; 
+      max-height: 100%; 
+    }
+  }
+  
+  td.buyer-cart.item.name {
+    width: 20vw;
+    height: 20vh;
+  
+    h3 {
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      padding-bottom: 1rem;
+    }
+  
+    button {
+
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+    }
+  }
+}
+

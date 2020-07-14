@@ -111,10 +111,8 @@ export default function OrderPayment(props) {
     <>
       <div className='order-payment'>
         <h2>My Cart</h2>
+        <p>You currently have {OrderListItem.length} {OrderListItem.length > 1 ? 'items' : 'item'} in your cart</p>
       </div>
-      <div> 
-        <h3>Items in Cart</h3>
-      </div> 
       <div className="order-payment list">
         <Table borderless hover>
           <thead>
