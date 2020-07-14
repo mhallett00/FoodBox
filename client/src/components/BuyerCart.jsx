@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
+
 import BuyerCartListItem from './BuyerCartListItem';
 import { priceSubtotal } from '../helpers/price_calcs'
 
