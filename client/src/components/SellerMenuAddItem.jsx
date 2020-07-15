@@ -95,10 +95,10 @@ export default function SellerMenuAddItem(props) {
           rows="5"
         />
         </Form.Group>
+        <Button variant="dark" type="submit" onClick={handleSubmit}>
+          + Add Item 
+        </Button>
       </Form>
-      <Button variant="dark" type="submit" onClick={handleSubmit}>
-        + Add Item 
-      </Button>
     </div>
   );
 }

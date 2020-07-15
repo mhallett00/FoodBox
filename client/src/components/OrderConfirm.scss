@@ -1,18 +1,13 @@
 .order-confirm {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
+  // flex-wrap: wrap;
   padding-left: 5rem;
   padding-right: 5rem;
   padding-top: 0rem;
   padding-bottom: 5rem;
   
   .order-confirm-description.group {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    align-content: space-between;
     font-size: 1rem;
     flex-basis: 40%;
     flex-grow: 1;
@@ -27,7 +22,6 @@
       }
 
       p {
-        // background-color: red;
         font-size: 2rem;
         padding-top: 2rem;
         padding-bottom: 2rem;        
@@ -43,21 +37,20 @@
           font-weight: 500;
         }
       }
-
       .order-confirm-register.link {
         padding-top: 1rem;
         padding-bottom: 1rem; 
+        
         p {
           font-size: 1.2rem;
         }
       }
-
     }
-
   }
 
   .order-confirm-image {
     display: flex;
+    flex-basis: 50%;
     flex-grow: 1;
     justify-content: center;
     padding: 2rem 2rem;
