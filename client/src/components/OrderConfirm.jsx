@@ -30,7 +30,7 @@ export default function OrderConfirm(props) {
       <div className="order-confirm-description group">
         <div className="order-confirm-description">
           <h2>Your order has been confirmed!</h2>
-          <p>Your order helps our community's homecooks in supporting their families, sharing their culture and tradition alive through their passion of cooking. We hope that you continue to support our homecooks and their communities in building our culture through Foodbox. Merci beaucoup!</p>
+          <p>Your order helps our community's homecooks in supporting their families, sharing their culture and tradition alive through their passion of cooking. We hope that you continue to support our homecooks and their communities in building our culture through Foodbox.</p>
         <div className="order-confirm-acknowledge button">
             <Button variant="dark" href="/buyer_page">Return Home</Button>{' '}
         </div>
