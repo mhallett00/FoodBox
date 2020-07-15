@@ -15,8 +15,8 @@ export default function SellerMenuAddItem(props) {
     name: '',
     description: '',
     image: '',
-    quantity: 0,
-    price: 0,
+    quantity: null,
+    price: null,
     is_active: true
   })
  
