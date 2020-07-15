@@ -1,7 +1,7 @@
 import React from "react";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-
+import "./BuyerCart.scss";
 import BuyerCartListItem from './BuyerCartListItem';
 import { priceSubtotal } from '../helpers/price_calcs'
 

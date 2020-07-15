@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Table from 'react-bootstrap/Table';
 import SellerOrderDashboardListItem from './SellerOrderDashboardListItem';
+import './SellerOrderDashboard.scss';
 import axios from 'axios';
 
 export default function SellerOrderDashboard(props) {
@@ -58,12 +59,12 @@ export default function SellerOrderDashboard(props) {
     : "No menu!";  
 
   return (
-    <>
-      <div className='seller-dashboard'>
+    <div className='seller-dashboard'>
+      <div className='seller-dashboard header'>
         <h2>Your Menu's Dashboard</h2>
       </div>
       <div className="seller-dashboard list">
-        <Table striped borderless hover>
+        <Table borderless hover>
           <thead>
             <tr>
               <th>Order Id</th>
@@ -78,7 +79,7 @@ export default function SellerOrderDashboard(props) {
           </tbody>
         </Table>
       </div>
-    </>
+    </div>
   );
 }
 

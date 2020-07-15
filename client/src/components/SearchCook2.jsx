@@ -4,7 +4,7 @@ import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-
+import "./SearchCook2.scss";
 import Map from "./Map";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";

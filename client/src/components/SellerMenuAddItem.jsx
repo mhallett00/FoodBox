@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import "./SellerMenuAddItem.scss";
 import axios from 'axios';
 
 export default function SellerMenuAddItem(props) {

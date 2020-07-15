@@ -1,6 +1,7 @@
 import React from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import "./Login.scss";
 import { useState } from "react";
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';

@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import OHFrag from './OHFrag'
+import './BuyerDashboardOrderListItem.scss'
 
 export default function BuyerDashboardOrderListItem(props) {
 
@@ -20,7 +21,7 @@ export default function BuyerDashboardOrderListItem(props) {
     : "No orders!";
   return (
       <tr>
-        <td >{order_id}</td>
+        <td>{order_id}</td>
         <td>{orderfragment}</td>
         <td>{seller_fn} {seller_ln}</td>
         <td>$ {(order_total / 100).toFixed(2)}</td>

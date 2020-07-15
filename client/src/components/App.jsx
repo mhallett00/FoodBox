@@ -32,7 +32,6 @@ import {loadStripe} from '@stripe/stripe-js';
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
 export default function App() {
-  
   //  const [show, setShow] = useState(REGISTER);
   //  const [firstName, setFirstName] = useState("");
   //  const [lastName, setLastName] = useState("");
@@ -146,9 +145,7 @@ export default function App() {
           <Route path="/">
             <Homepage userData={userData}/>
           </Route>
-
         </Switch>
-
       </div>
     </Router>
   )

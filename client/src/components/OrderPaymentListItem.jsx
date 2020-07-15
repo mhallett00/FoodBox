@@ -1,5 +1,6 @@
 import React from "react";
 import Image from 'react-bootstrap/Image';
+import "./OrderPaymentListItem.scss";
 
 
 export default function OrderPaymentListItem(props) {

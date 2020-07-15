@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Table from 'react-bootstrap/Table';
-
+import "./BuyerDashboard.scss";
+import "./BuyerDashboardOrderListItem.scss";
+import "./BuyerDashboardHistoryListItem.scss";
 import BuyerDashboardOrderListItem from './BuyerDashboardOrderListItem';
 import BuyerDashboardHistoryListItem from './BuyerDashboardHistoryListItem';
 import axios from 'axios';
@@ -67,47 +69,49 @@ export default function BuyerDashboard(props) {
     : "No menu!";  
 
   return (
-    <>
-      <div className='buyer-dashboard'>
+    <div className='buyer-dashboard'>
+      <div className='buyer-dashboard header'>
         <h2>Your Orders</h2>
+        <hr/>
         <h4>Upcoming Deliveries</h4>
+        <hr/>
       </div>
-      <div className="buyer-dashboard list">
-        <div className="buyer-dashboard upcoming_list">
-          <Table striped borderless hover>
-            <thead>
-              <tr>
-                <th>Order Id</th>
-                <th>Items</th>
-                <th>Seller Name</th>
-                <th>Order Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {upcomingOrders}
-            </tbody>
-          </Table>
-        </div>
-        <div className='buyer-dashboard history'>
-          <h4>Order History</h4>
-        </div>
-        <div className="buyer-dashboard history_list">
-          <Table striped borderless hover>
-            <thead>
-              <tr>
-                <th>Order Id</th>
-                <th>Items</th>
-                <th>Seller Name</th>
-                <th>Order Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {completeOrders}
-            </tbody>
-          </Table>
-        </div>
+      <div className="buyer-dashboard upcoming_list">
+        <Table borderless hover>
+          <thead>
+            <tr>
+              <th>Order Id</th>
+              <th>Items</th>
+              <th>Seller Name</th>
+              <th>Order Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {upcomingOrders}
+          </tbody>
+        </Table>
       </div>
-    </>
+      <div className='buyer-dashboard history'>
+        <hr/>
+        <h4>Order History</h4>
+        <hr/>
+      </div>
+      <div className="buyer-dashboard history_list">
+        <Table borderless hover>
+          <thead>
+            <tr>
+              <th>Order Id</th>
+              <th>Items</th>
+              <th>Seller Name</th>
+              <th>Order Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {completeOrders}
+          </tbody>
+        </Table>
+      </div>
+    </div>
   );
 }
 

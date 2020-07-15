@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
+import "./Main.scss";
 
 export default function Main(props) {
 

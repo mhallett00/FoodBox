@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
+import "./SellerMenuOrderListItem.scss";
 import { propTypes } from 'react-bootstrap/esm/Image';
 
 export default function SellerMenuOrderListItem(props) {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import SellerMenuListItem from './SellerMenuListItem';
+import "./SellerMenuList.scss";
 import axios from 'axios';
 
 export default function SellerMenuList(props) {

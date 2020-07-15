@@ -2,11 +2,12 @@ import React from "react";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import "./OrderPayment.scss";
 import OrderPaymentListItem from './OrderPaymentListItem';
 import { useHistory } from 'react-router-dom';
 // import PaymentDetails from './PaymentDetails';
-import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
-import {priceSubtotal, GST, QST, deliveryFee, totalPrice} from '../helpers/price_calcs'
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { priceSubtotal, GST, QST, deliveryFee, totalPrice } from '../helpers/price_calcs'
 import axios from 'axios';
 
 export default function OrderPayment(props) {

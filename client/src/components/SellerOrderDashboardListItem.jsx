@@ -2,6 +2,7 @@ import React from 'react';
 // import Form from 'react-bootstrap/Form';
 import OHFragSeller from './OHFragSeller';
 import Button from 'react-bootstrap/Button';
+import './SellerOrderDashboardListItem.scss';
 
 export default function SellerOrderDashboardListItem(props) {
  
@@ -29,7 +30,6 @@ export default function SellerOrderDashboardListItem(props) {
         <td>{props.buyer_fn} {props.buyer_ln}</td>
         <td>$ {(props.order_total / 100).toFixed(2)}</td>
         <td>
-          {/* checkbox currently not working yet*/}
           <Button variant="dark" type="submit" onClick={onConfirm}>
               Confirm
           </Button>
