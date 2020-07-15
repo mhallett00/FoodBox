@@ -36,10 +36,9 @@ export default function OrderConfirm(props) {
             <Button variant="dark" href="/buyer_page">Return Home</Button>{' '}
         </div>
         </div>
-        <div className="order-confirm-image">
-          {/* please remove inline styling when css applied */}
-          <Image src="https://images.pexels.com/photos/3785693/pexels-photo-3785693.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" fluid="true" />
-        </div>
+      </div>
+    <div className="order-confirm-image">
+        <Image src="https://images.pexels.com/photos/3785693/pexels-photo-3785693.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" fluid="true" />
       </div>
     </div>
   )
