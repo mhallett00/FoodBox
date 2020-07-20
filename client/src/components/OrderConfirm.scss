@@ -1,10 +1,9 @@
 .order-confirm {
   display: flex;
   flex-flow: row wrap;
-  // flex-wrap: wrap;
   padding-left: 5rem;
   padding-right: 5rem;
-  padding-top: 0rem;
+  padding-top: 5rem;
   padding-bottom: 5rem;
   
   .order-confirm-description.group {
@@ -14,17 +13,19 @@
     padding: 2rem 4rem;
 
     .order-confirm-description {
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
 
       h2 {
-        font-size: 5rem;
-        font-family: "Playfair Display", serif;
-        font-weight: 500;
+        font-size: 4rem;
       }
 
       p {
-        font-size: 2rem;
+        font-family: "Lato", serif;
+        font-weight: 400;
+        font-size: 1.5rem;
         padding-top: 2rem;
-        padding-bottom: 2rem;        
+        padding-bottom: 2rem;   
       }
 
       .order-confirm-acknowledge.button {
@@ -50,13 +51,15 @@
 
   .order-confirm-image {
     display: flex;
-    flex-basis: 50%;
+    flex-flow: column wrap;
+    flex-basis: 60%;
     flex-grow: 1;
     justify-content: center;
     padding: 2rem 2rem;
 
     .img-fluid {
       max-width: 100%;
+      max-height: 100%;
     }
   }
 }
