@@ -7,7 +7,7 @@ exports.seed = function(knex, Promise) {
       {
         user_id: 2,
         name: "Poutine",
-        description: "Lorem ipsum",
+        description: "Yukon gold potatoes fried crisp, topped with squeaky cheese curds, and smothered with a rich beef demi.",
         image: "https://images.unsplash.com/photo-1586805608485-add336722759?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
         quantity: 4,
         price_cents: 899,
@@ -25,7 +25,7 @@ exports.seed = function(knex, Promise) {
       {
         user_id: 2,
         name: "Petit Poulet",
-        description: "Lorem ipsum",
+        description: "Marinated breast, flame grilled to perfection. Served with mixed veg, sautéed in lemon herb butter.",
         image: "https://images.unsplash.com/photo-1532550907401-a500c9a57435?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
         quantity: 0,
         price_cents: 1699,
