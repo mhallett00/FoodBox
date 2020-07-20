@@ -6,8 +6,6 @@ A food oriented e-commerce application built on React, Express, and PostgreSQL.
 
 ## Project Concept
 
----
-
 With Foodbox, we're trying to modernize the concept of the world's oldest meal delivery system. Inspired by the Dabbiwallas of Bombay, FoodBox aim to create a medium for talented home cooks to share their lovingly prepared meals with food lovers anywhere. 
 
 !["Screenshot of the payment screen, display size < 1024px"](https://raw.githubusercontent.com/mhallett00/FoodBox/master/public/images/payment.png)
@@ -35,8 +33,6 @@ The FoodBox team is:
 - [Raghav Shrivastav](https://github.com/Raghav0811)
 
 ## Setup
-
----
 
 Follow these steps in order to get FoodBox running!
 
@@ -80,13 +76,9 @@ Follow these steps in order to get FoodBox running!
 
 ## Stripe Testing
 
----
-
 See the [stripe documentation](https://stripe.com/docs/testing#cards) for test card numbers you can use.
 
 ## Dependencies
-
----
 
 - react: ^16.13.1
 - react-bootstrap: ^1.1.0
